@@ -8,8 +8,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#009C1D",
+        accent: "#E25100",
+        dark: "#363435",
+      },
+      fontFamily: {
+        xoireqe: ['var(--font-xoireqe)'],
+        edgar: ['var(--font-opti-edgar)'],
       },
     },
   },

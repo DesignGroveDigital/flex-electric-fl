@@ -19,3 +19,18 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* Add to your globals.css */
+@keyframes subtle-zoom {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+.animate-subtle-zoom {
+  animation: subtle-zoom 20s ease-in-out infinite alternate;
+}
