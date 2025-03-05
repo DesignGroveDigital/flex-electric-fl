@@ -34,3 +34,27 @@ body {
 .animate-subtle-zoom {
   animation: subtle-zoom 20s ease-in-out infinite alternate;
 }
+
+/* ServiceArea.module.css */
+.map {
+  fill: #363435;
+  transition: all 0.3s ease;
+}
+
+.map:hover {
+  fill: #009C1D;
+}
+
+.serviceArea {
+  fill: #009C1D;
+}
+
+.highlight {
+  fill: #E25100;
+  opacity: 0.1;
+}
+
+/*Change scroll amount with mouse wheel*/
+html {
+  scroll-behavior: smooth;
+}

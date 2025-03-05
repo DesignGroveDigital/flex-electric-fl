@@ -9,6 +9,7 @@ import GallerySection from "./components/Gallery";
 import NewsletterSection from "./components/Subscription";
 import TestimonialsSection from "./components/Testimonials";
 import ContactSection from "./components/Contact";
+import ServiceAreaSection from "./components/v2/Servicing";
 
 export default function Home() {
   return (
@@ -16,10 +17,10 @@ export default function Home() {
       <HeroSection />
       <FeaturesStrip />
       <ServicesSection />
+      <ServiceAreaSection />
       <AboutSection />
       <WhyUsSection />
       <GallerySection />
-      <NewsletterSection />
       <TestimonialsSection  />
       <ContactSection />
     </div>

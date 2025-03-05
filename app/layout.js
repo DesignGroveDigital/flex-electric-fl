@@ -15,7 +15,7 @@ const optiEdgar = localFont({
 
 export const metadata = {
   title: "FlexElectric - Professional Electrical Services",
-  description: "Licensed electrical contractors serving South Florida with 24/7 emergency services.",
+  description: "Licensed electrical contractors serving South Florida.",
 };
 
 export default function RootLayout({ children }) {

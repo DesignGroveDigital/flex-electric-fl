@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote, User } from 'lucide-react';
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -44,32 +44,29 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="w-full bg-gray-100 py-24 relative overflow-hidden">
+    <section className="w-full bg-gray-100 py-16 sm:py-20 md:py-24 relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-96 h-96 transform rotate-45 bg-gradient-to-br from-primary/5 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 transform -rotate-45 bg-gradient-to-tl from-accent/5 to-transparent" />
+        <div className="absolute top-0 right-0 w-72 sm:w-96 h-72 sm:h-96 transform rotate-45 bg-gradient-to-br from-primary/5 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-72 sm:w-96 h-72 sm:h-96 transform -rotate-45 bg-gradient-to-tl from-accent/5 to-transparent" />
       </div>
 
       <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-dark font-xoireqe text-5xl uppercase mb-8">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-dark font-xoireqe text-3xl sm:text-4xl md:text-5xl uppercase mb-6 md:mb-8">
             Client Testimonials
           </h2>
-          <div className="flex items-center justify-center gap-6 mb-6">
-            <div className="h-[3px] w-16 bg-accent transform -rotate-45" />
-            <div className="h-[3px] w-16 bg-primary transform rotate-45" />
-          </div>
+          <div className="h-1 w-24 bg-primary mx-auto"></div>
         </div>
 
         {/* Testimonial Carousel */}
         <div className="max-w-4xl mx-auto">
           <div className="relative">
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons - Desktop */}
             <button 
               onClick={previousTestimonial}
-              className="absolute -left-16 top-1/2 -translate-y-1/2 p-2 text-dark/60 hover:text-primary transition-colors"
+              className="hidden md:block absolute -left-16 top-1/2 -translate-y-1/2 p-2 text-dark/60 hover:text-primary transition-colors"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-8 h-8" />
@@ -77,49 +74,77 @@ const TestimonialsSection = () => {
 
             <button 
               onClick={nextTestimonial}
-              className="absolute -right-16 top-1/2 -translate-y-1/2 p-2 text-dark/60 hover:text-primary transition-colors"
+              className="hidden md:block absolute -right-16 top-1/2 -translate-y-1/2 p-2 text-dark/60 hover:text-primary transition-colors"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-8 h-8" />
             </button>
 
             {/* Testimonial Card */}
-            <div className="bg-white p-8 md:p-12 shadow-lg relative">
+            <div className="bg-white p-6 sm:p-8 md:p-12 shadow-lg relative">
               {/* Quote Icon */}
-              <div className="absolute -top-6 left-12">
-                <div className="bg-primary p-4 transform rotate-45">
-                  <Quote className="w-6 h-6 text-white transform -rotate-45" />
+              <div className="absolute -top-5 md:-top-6 left-8 md:left-12">
+                <div className="bg-primary p-3 md:p-4 transform rotate-45">
+                  <Quote className="w-4 h-4 md:w-6 md:h-6 text-white transform -rotate-45" />
                 </div>
               </div>
               
               {/* Testimonial Content */}
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {testimonials[currentIndex].quote.map((paragraph, index) => (
-                  <p key={index} className="text-dark/80 text-lg leading-relaxed">
+                  <p key={index} className="text-dark/80 text-base sm:text-lg leading-relaxed">
                     {paragraph}
                   </p>
                 ))}
 
                 <div className="pt-6 border-t border-dark/10">
-                  <div className="font-edgar uppercase tracking-wider text-dark text-lg">
-                    {testimonials[currentIndex].author}
-                  </div>
-                  <div className="text-dark/60 space-y-1 mt-2">
-                    <div>{testimonials[currentIndex].role}</div>
-                    <div className="font-medium text-primary">{testimonials[currentIndex].company}</div>
+                  <div className="flex items-start gap-4">
+                    {/* User Icon */}
+                    <div className="p-3 bg-primary/10 rounded-full mt-1">
+                      <User className="w-full h-full text-primary" />
+                    </div>
+                    
+                    <div>
+                      <div className="font-edgar uppercase tracking-wider text-dark text-base sm:text-lg">
+                        {testimonials[currentIndex].author}
+                      </div>
+                      <div className="text-dark/60 space-y-1 mt-1">
+                        <div>{testimonials[currentIndex].role}</div>
+                        <div className="font-medium text-primary">{testimonials[currentIndex].company}</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            
+            {/* Mobile Navigation Buttons */}
+            <div className="flex justify-between mt-6 md:hidden">
+              <button 
+                onClick={previousTestimonial}
+                className="p-2 bg-white/80 rounded-full shadow-sm text-dark/60 hover:text-primary transition-colors"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button 
+                onClick={nextTestimonial}
+                className="p-2 bg-white/80 rounded-full shadow-sm text-dark/60 hover:text-primary transition-colors"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-3 mt-12">
+          <div className="flex justify-center gap-3 mt-8 md:mt-12">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 transform rotate-45 transition-colors
+                className={`w-2 h-2 md:w-3 md:h-3 transform rotate-45 transition-colors
                           ${index === currentIndex ? 'bg-primary' : 'bg-dark/20 hover:bg-dark/30'}`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
