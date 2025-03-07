@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import PageBannerAngled from '../components/Banner';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ArrowRight, Lightbulb } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Lightbulb, X } from 'lucide-react';
 
 // Updated gallery images using actual image files
 const galleryImages = [
@@ -153,12 +153,6 @@ const galleryImages = [
       title: 'Ritz Carlton'
     },
     {
-      src: '/gallery/ritz-carlton-2.jpg',
-      alt: 'Lighting installation at Ritz Carlton',
-      category: 'commercial',
-      title: 'Ritz Carlton Lighting'
-    },
-    {
       src: '/gallery/ritz-carlton-3.jpg',
       alt: 'Interior electrical work at Ritz Carlton',
       category: 'commercial',
@@ -202,8 +196,269 @@ const galleryImages = [
     }
   ];
 
-// Image Carousel Component
-const ImageCarousel = ({ images }) => {
+// Main Gallery Page Component with added Image Modal
+export default function GalleryPage() {
+  // State for modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentModalImageIndex, setCurrentModalImageIndex] = useState(0);
+  const [modalImages, setModalImages] = useState([]);
+
+  // Open modal with specific image
+  const openModal = (images, index) => {
+    setModalImages(images);
+    setCurrentModalImageIndex(index);
+    setIsModalOpen(true);
+    // Prevent body scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Close modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+    // Restore body scrolling
+    document.body.style.overflow = 'auto';
+  };
+
+  // Navigate to next image
+  const nextImage = (e) => {
+    e.stopPropagation(); // Prevent closing the modal
+    setCurrentModalImageIndex((prevIndex) => 
+      prevIndex === modalImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  // Navigate to previous image
+  const prevImage = (e) => {
+    e.stopPropagation(); // Prevent closing the modal
+    setCurrentModalImageIndex((prevIndex) => 
+      prevIndex === 0 ? modalImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  // Handle keyboard navigation
+  const handleKeyDown = (e) => {
+    if (!isModalOpen) return;
+    
+    switch (e.key) {
+      case 'ArrowRight':
+        nextImage(e);
+        break;
+      case 'ArrowLeft':
+        prevImage(e);
+        break;
+      case 'Escape':
+        closeModal();
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Add event listener for key press
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isModalOpen, modalImages, currentModalImageIndex]);
+
+  return (
+    <main className="bg-white">
+      <PageBannerAngled 
+        title="Our Work" 
+        subtitle="View our portfolio of commercial and residential electrical projects"
+        backgroundImage="/gallery-banner.jpg"
+      />
+      
+      {/* Featured Projects Carousel */}
+      <section className="py-16 max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6">
+            Featured Projects
+          </h2>
+          <motion.div 
+            className="h-1 w-24 bg-primary mx-auto mb-8"
+            initial={{ width: 0 }}
+            whileInView={{ width: "6rem" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+            Explore our showcase of recent electrical projects for homes and businesses throughout South Florida.
+          </p>
+        </motion.div>
+        
+        <ImageCarouselWithModal 
+          images={galleryImages.slice(0, 6)} 
+          openModal={(index) => openModal(galleryImages.slice(0, 6), index)} 
+        />
+      </section>
+      
+      {/* Complete Project Gallery */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6">
+              Project Gallery
+            </h2>
+            <motion.div 
+              className="h-1 w-24 bg-primary mx-auto mb-8"
+              initial={{ width: 0 }}
+              whileInView={{ width: "6rem" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              Browse our complete gallery of electrical projects and filter by type to see examples of our work.
+            </p>
+          </motion.div>
+          
+          <ImageGridWithModal images={galleryImages} openModal={openModal} />
+        </div>
+      </section>
+      
+      {/* CTA Section */}
+      <section className="bg-accent py-16 relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-64 h-64 transform rotate-45">
+            <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 transform -rotate-12">
+            <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707M12 21v-1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 18a6 6 0 100-12 6 6 0 000 12z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+            <div className="max-w-2xl">
+              <div className="flex items-center mb-4">
+                <Lightbulb className="w-8 h-8 text-white mr-4" />
+                <h2 className="text-3xl md:text-4xl font-xoireqe text-white">
+                  Ready for Your Project?
+                </h2>
+              </div>
+              <p className="text-white/90 text-lg">
+                Whether you need electrical services for your home or business, our team is ready to bring your project to life with the same quality and expertise showcased in our gallery.
+              </p>
+            </div>
+            
+            <div className="flex-shrink-0">
+              <a 
+                href="/contact" 
+                className="bg-dark hover:bg-dark/90 text-white font-edgar uppercase tracking-wider py-4 px-8 inline-flex items-center transition-colors rounded-sm"
+              >
+                <span className="mr-2">Get Your Free Estimate</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Image Modal */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={closeModal}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
+          <div className="relative w-full max-w-5xl max-h-[90vh] flex flex-col">
+            {/* Modal Header */}
+            <div className="absolute top-0 right-0 z-10 p-4 flex items-center justify-end space-x-4">
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeModal();
+                }}
+                className="bg-black/50 hover:bg-accent text-white rounded-full p-2 transition-colors"
+                aria-label="Close modal"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            
+            {/* Image Container */}
+            <div className="relative w-full h-[70vh] overflow-hidden flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentModalImageIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full h-full relative flex items-center justify-center"
+                >
+                  <Image
+                    src={modalImages[currentModalImageIndex].src}
+                    alt={modalImages[currentModalImageIndex].title}
+                    fill
+                    className="object-contain"
+                    id="modal-title"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            
+            {/* Navigation Buttons */}
+            <button 
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-accent text-white rounded-full p-2 transition-colors"
+              onClick={prevImage}
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            
+            <button 
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-accent text-white rounded-full p-2 transition-colors"
+              onClick={nextImage}
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+            
+            {/* Image Caption */}
+            <div className="p-4 text-center text-white">
+              <h3 className="text-xl font-edgar">
+                {modalImages[currentModalImageIndex].title}
+              </h3>
+              <p className="text-gray-300">
+                {modalImages[currentModalImageIndex].category === 'commercial' ? 'Commercial Project' : 'Residential Project'}
+              </p>
+            </div>
+
+            {/* Image Counter */}
+            <div className="absolute bottom-16 left-4 bg-black/50 text-white px-3 py-1 rounded-sm text-sm">
+              {currentModalImageIndex + 1} / {modalImages.length}
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}
+
+// Modified Carousel Component with Modal Support
+const ImageCarouselWithModal = ({ images, openModal }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoPlayRef = useRef(null);
@@ -251,7 +506,8 @@ const ImageCarousel = ({ images }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full h-full relative"
+          className="w-full h-full relative cursor-pointer"
+          onClick={() => openModal(currentIndex)}
         >
           <Image
             src={images[currentIndex].src}
@@ -272,32 +528,46 @@ const ImageCarousel = ({ images }) => {
               </p>
             </div>
           </div>
+
+          {/* View Larger Hint */}
+          <div className="absolute top-4 right-4 bg-dark/70 text-white font-edgar text-sm py-1 px-3 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity">
+            Click to enlarge
+          </div>
         </motion.div>
       </AnimatePresence>
 
       {/* Navigation Buttons */}
       <button 
-        onClick={prevSlide} 
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-dark/70 hover:bg-accent text-white p-2 rounded-full transition-colors"
+        onClick={(e) => {
+          e.stopPropagation();
+          prevSlide();
+        }} 
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-dark/70 hover:bg-accent text-white p-2 rounded-full transition-colors z-10"
         aria-label="Previous image"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
       
       <button 
-        onClick={nextSlide} 
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-dark/70 hover:bg-accent text-white p-2 rounded-full transition-colors"
+        onClick={(e) => {
+          e.stopPropagation();
+          nextSlide();
+        }} 
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-dark/70 hover:bg-accent text-white p-2 rounded-full transition-colors z-10"
         aria-label="Next image"
       >
         <ChevronRight className="w-6 h-6" />
       </button>
 
       {/* Indicators */}
-      <div className="absolute bottom-6 right-6 flex space-x-2">
+      <div className="absolute bottom-6 right-6 flex space-x-2 z-10">
         {images.map((_, index) => (
           <button
             key={index}
-            onClick={() => goToSlide(index)}
+            onClick={(e) => {
+              e.stopPropagation();
+              goToSlide(index);
+            }}
             className={`w-2.5 h-2.5 rounded-full transition-colors ${
               index === currentIndex ? 'bg-accent' : 'bg-white/50 hover:bg-white'
             }`}
@@ -310,8 +580,8 @@ const ImageCarousel = ({ images }) => {
   );
 };
 
-// Image Grid Component
-const ImageGrid = ({ images }) => {
+// Modified Grid Component with Modal Support
+const ImageGridWithModal = ({ images, openModal }) => {
   const [filter, setFilter] = useState('all');
   const [activeImages, setActiveImages] = useState(images);
 
@@ -370,7 +640,16 @@ const ImageGrid = ({ images }) => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
-              className="group relative h-64 overflow-hidden rounded-sm shadow-md"
+              className="group relative h-64 overflow-hidden rounded-sm shadow-md cursor-pointer"
+              onClick={() => openModal(activeImages, index)}
+              tabIndex={0}
+              role="button"
+              aria-label={`View ${image.title}`}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  openModal(activeImages, index);
+                }
+              }}
             >
               <Image
                 src={image.src}
@@ -385,6 +664,9 @@ const ImageGrid = ({ images }) => {
                     {image.category === 'commercial' ? 'Commercial Project' : 'Residential Project'}
                   </p>
                 </div>
+                <div className="absolute top-4 right-4 bg-dark/70 text-white text-sm py-1 px-3 rounded-sm">
+                  Click to enlarge
+                </div>
               </div>
             </motion.div>
           ))}
@@ -393,123 +675,3 @@ const ImageGrid = ({ images }) => {
     </div>
   );
 };
-
-// Main Gallery Page Component
-export default function GalleryPage() {
-  return (
-    <main className="bg-white">
-      <PageBannerAngled 
-        title="Our Work" 
-        subtitle="View our portfolio of commercial and residential electrical projects"
-        backgroundImage="/gallery-banner.jpg"
-      />
-      
-      {/* Featured Projects Carousel */}
-      <section className="py-16 max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6">
-            Featured Projects
-          </h2>
-          <motion.div 
-            className="h-1 w-24 bg-primary mx-auto mb-8"
-            initial={{ width: 0 }}
-            whileInView={{ width: "6rem" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          />
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Explore our showcase of recent electrical projects for homes and businesses throughout South Florida.
-          </p>
-        </motion.div>
-        
-        <ImageCarousel images={galleryImages.slice(0, 6)} />
-      </section>
-      
-      {/* Complete Project Gallery */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6">
-              Project Gallery
-            </h2>
-            <motion.div 
-              className="h-1 w-24 bg-primary mx-auto mb-8"
-              initial={{ width: 0 }}
-              whileInView={{ width: "6rem" }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            />
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-              Browse our complete gallery of electrical projects and filter by type to see examples of our work.
-            </p>
-          </motion.div>
-          
-          <ImageGrid images={galleryImages} />
-        </div>
-      </section>
-      
-      {/* CTA Section */}
-      <section className="bg-accent py-16 relative overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-64 h-64 transform rotate-45">
-            <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 transform -rotate-12">
-            <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707M12 21v-1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M12 18a6 6 0 100-12 6 6 0 000 12z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-        </div>
-        
-        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-            <div className="max-w-2xl">
-              <div className="flex items-center mb-4">
-                <Lightbulb className="w-8 h-8 text-white mr-4" />
-                <h2 className="text-3xl md:text-4xl font-xoireqe text-white">
-                  Ready for Your Project?
-                </h2>
-              </div>
-              <p className="text-white/90 text-lg">
-                Whether you need electrical services for your home or business, our team is ready to bring your project to life with the same quality and expertise showcased in our gallery.
-              </p>
-            </div>
-            
-            <div className="flex-shrink-0">
-              <a 
-                href="#contact" 
-                className="bg-dark hover:bg-dark/90 text-white font-edgar uppercase tracking-wider py-4 px-8 inline-flex items-center transition-colors rounded-sm"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                <span className="mr-2">Get Your Free Estimate</span>
-                <ArrowRight className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}

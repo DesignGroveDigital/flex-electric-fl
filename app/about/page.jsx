@@ -303,15 +303,8 @@ export default function AboutPage() {
             
             <div className="flex-shrink-0">
               <a 
-                href="#contact" 
+                href="/contact" 
                 className="bg-dark hover:bg-dark/90 text-white font-edgar uppercase tracking-wider py-4 px-8 inline-flex items-center transition-colors rounded-sm"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
               >
                 <span className="mr-2">Get Your Free Estimate</span>
                 <ArrowRight className="w-5 h-5" />

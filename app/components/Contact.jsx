@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 
 const ContactSection = () => {
   // Form state
@@ -76,17 +76,13 @@ const ContactSection = () => {
     setSubmitError(false);
     
     try {
-      // This would be replaced with your actual API endpoint
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
+       const response = await fetch('/api/send-email', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(formData)
+       });
       
-      // if (!response.ok) throw new Error('Failed to submit');
-      
-      // Simulate API call for demo
-      await new Promise(resolve => setTimeout(resolve, 1000));
+       if (!response.ok) throw new Error('Failed to submit');
       
       setSubmitSuccess(true);
       // Reset form after successful submission
@@ -159,8 +155,8 @@ const ContactSection = () => {
                 <div>
                   <div className="font-edgar uppercase tracking-wider mb-1">Address</div>
                   <address className="text-white/80 not-italic">
-                    43 South Powerline Rd, #431<br />
-                    Pompano Beach, FL 33069
+                  1860 SW Fountainview Blvd, #1008<br />
+                    Port St. Lucie, FL 34986
                   </address>
                 </div>
               </div>
@@ -184,7 +180,7 @@ const ContactSection = () => {
                 <div>
                   <div className="font-edgar uppercase tracking-wider mb-1">Email</div>
                   <a href="mailto:flexelectric.fl@gmail.com" className="text-white/80 hover:text-white transition-colors" aria-label="Email us at flexelectric.fl@gmail.com">
-                    flexelectric.fl@gmail.com
+                    info@flexelectricfl.com
                   </a>
                 </div>
               </div>
@@ -193,7 +189,7 @@ const ContactSection = () => {
             {/* Google Map */}
             <div className="h-[300px] sm:h-[350px] md:h-[250px] lg:h-[300px] relative overflow-hidden rounded-sm">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.9935789615456!2d-80.16075532385426!3d26.22939817706103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9039f302d7a65%3A0xca940d4daf756897!2s43%20S%20Powerline%20Rd%20%23431%2C%20Pompano%20Beach%2C%20FL%2033069!5e0!3m2!1sen!2sus!4v1739702285169!5m2!1sen!2sus"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3534.1071143457787!2d-80.39983978491936!3d27.650193982806277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88deeb0ee7d1ded3%3A0x8fc38a3f20345e3b!2s1860%20SW%20Fountainview%20Blvd%2C%20Port%20St.%20Lucie%2C%20FL%2034986!5e0!3m2!1sen!2sus!4v1656946565425!5m2!1sen!2sus" 
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -342,7 +338,10 @@ const ContactSection = () => {
                       Processing...
                     </span>
                   ) : (
-                    "Send Message"
+                    <span className="flex items-center justify-center">
+                    Send Message
+                    <Send className="ml-2 w-5 h-5" />
+                    </span>
                   )}
                 </button>
               </form>

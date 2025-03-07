@@ -106,8 +106,8 @@ const Footer = () => {
                   <li className="flex items-start gap-3 text-white/70">
                     <MapPin className="w-5 h-5 mt-1 text-primary" />
                     <span>
-                      43 South Powerline Rd, #431<br />
-                      Pompano Beach, FL 33069
+                    1860 SW Fountainview Blvd, #1008<br />
+                    Port St. Lucie, FL 34986
                     </span>
                   </li>
                   <li>
@@ -125,7 +125,7 @@ const Footer = () => {
                       className="flex items-center gap-3 text-white/70 hover:text-primary transition-colors duration-200"
                     >
                       <Mail className="w-5 h-5 text-primary" />
-                      flexelectric.fl@gmail.com
+                      info@flexelectricfl.com
                     </a>
                   </li>
                 </ul>

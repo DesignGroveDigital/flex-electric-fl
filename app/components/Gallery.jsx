@@ -38,9 +38,9 @@ const GallerySection = () => {
     },
     {
       id: 5,
-      title: 'Ritz Carlton Lighting Design',
+      title: '',
       category: 'Commercial',
-      imageUrl: '/gallery/ritz-carlton-2.jpg',
+      imageUrl: '/gallery/.jpg',
     },
     {
       id: 1,
