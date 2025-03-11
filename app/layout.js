@@ -15,8 +15,8 @@ const optiEdgar = localFont({
 });
 
 export const metadata = {
-  title: "FlexElectric - Licensed Electrical Contractors South Florida | Commercial & Residential",
-  description: "Trusted electrical contractors serving South Florida with 30+ years of experience. Specializing in commercial and residential electrical services, panel upgrades, and installations.",
+  title: "FlexElectric - Licensed Electrical Contractors South Florida",
+  description: "Trusted electrical contractor serving South Florida with 30+ years of experience. Specializing in commercial and residential electrical services and installations.",
   keywords: "electrical contractors, South Florida electrician, commercial electrical, residential electrical, Port St. Lucie, electrical services, licensed electrician, electrical panel upgrades",
   robots: "index, follow",
   alternates: {
