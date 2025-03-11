@@ -20,11 +20,11 @@ const Navbar = () => {
     <nav className="w-full bg-white fixed top-0 z-50">
       <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-dark/10 to-transparent" />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24 lg:h-32">
+      <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-24 lg:h-28">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="relative h-20 w-48 sm:h-24 sm:w-56 lg:h-28 lg:w-64">
+            <div className="relative h-20 w-48 sm:h-20 sm:w-44 lg:h-24 lg:w-48">
               <Image
                 src="/flexelectric_logo.jpg"
                 alt="FlexElectric Logo"

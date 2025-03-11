@@ -267,7 +267,6 @@ export default function GalleryPage() {
       <PageBannerAngled 
         title="Our Work" 
         subtitle="View our portfolio of commercial and residential electrical projects"
-        backgroundImage="/gallery-banner.jpg"
       />
       
       {/* Featured Projects Carousel */}
@@ -568,7 +567,7 @@ const ImageCarouselWithModal = ({ images, openModal }) => {
               e.stopPropagation();
               goToSlide(index);
             }}
-            className={`w-2.5 h-2.5 rounded-full transition-colors ${
+            className={`w-2.5 h-2.5 rotate-45 transition-colors ${
               index === currentIndex ? 'bg-accent' : 'bg-white/50 hover:bg-white'
             }`}
             aria-label={`Go to slide ${index + 1}`}

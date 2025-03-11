@@ -1,9 +1,14 @@
 "use client"
 
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Mail, Phone, MapPin, Clock, Send, AlertCircle, CheckCircle } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
 
 const ContactSection = () => {
+  // Ref and inView for scroll animations
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
+  
   // Form state
   const [formData, setFormData] = useState({
     name: '',
@@ -20,14 +25,108 @@ const ContactSection = () => {
   
   // Form validation state
   const [errors, setErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
+  
+  // Character count for description
+  const [charCount, setCharCount] = useState(0);
+  const maxChars = 500;
+  
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { 
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const formVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        delay: 0.3,
+        ease: "easeOut"
+      }
+    }
+  };
+  
+  const contactItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (custom) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        delay: custom * 0.15,
+        ease: "easeOut"
+      }
+    })
+  };
   
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    // Special handling for phone formatting
+    if (name === 'phone') {
+      // Keep only digits
+      const digitsOnly = value.replace(/\D/g, '');
+      
+      // Format phone number as user types (xxx) xxx-xxxx
+      let formattedPhone = '';
+      if (digitsOnly.length > 0) {
+        formattedPhone = digitsOnly.substring(0, 10);
+        if (formattedPhone.length > 6) {
+          formattedPhone = `(${formattedPhone.substring(0, 3)}) ${formattedPhone.substring(3, 6)}-${formattedPhone.substring(6)}`;
+        } else if (formattedPhone.length > 3) {
+          formattedPhone = `(${formattedPhone.substring(0, 3)}) ${formattedPhone.substring(3)}`;
+        } else {
+          formattedPhone = `(${formattedPhone}`;
+        }
+      }
+      
+      setFormData(prev => ({
+        ...prev,
+        [name]: formattedPhone
+      }));
+    } else if (name === 'description') {
+      setCharCount(value.length);
+      setFormData(prev => ({
+        ...prev,
+        [name]: value.substring(0, maxChars)
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+    
+    // Mark field as touched
+    if (!touchedFields[name]) {
+      setTouchedFields(prev => ({
+        ...prev,
+        [name]: true
+      }));
+    }
     
     // Clear error for this field when user types
     if (errors[name]) {
@@ -38,37 +137,114 @@ const ContactSection = () => {
     }
   };
   
-  // Validate form
-  const validateForm = () => {
-    const newErrors = {};
-    
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-    
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = 'Email format is invalid';
-    }
-    
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    }
-    
-    if (!formData.description.trim()) {
-      newErrors.description = 'Please provide a brief description';
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  // Handle field blur for validation
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    validateField(name, formData[name]);
   };
+  
+  // Validate a single field
+  const validateField = (name, value) => {
+    let errorMessage = '';
+    
+    switch (name) {
+      case 'name':
+        if (!value.trim()) {
+          errorMessage = 'Name is required';
+        }
+        break;
+      case 'email':
+        if (!value.trim()) {
+          errorMessage = 'Email is required';
+        } else if (!/^\S+@\S+\.\S+$/.test(value)) {
+          errorMessage = 'Email format is invalid';
+        }
+        break;
+      case 'phone':
+        if (!value.trim()) {
+          errorMessage = 'Phone number is required';
+        } else if (value.replace(/\D/g, '').length < 10) {
+          errorMessage = 'Please enter a complete phone number';
+        }
+        break;
+      case 'description':
+        if (!value.trim()) {
+          errorMessage = 'Please provide a brief description';
+        }
+        break;
+      default:
+        break;
+    }
+    
+    setErrors(prev => ({
+      ...prev,
+      [name]: errorMessage
+    }));
+    
+    return !errorMessage;
+  };
+  
+  // Validate the entire form
+  const validateForm = () => {
+    const fieldNames = ['name', 'email', 'phone', 'description'];
+    let formIsValid = true;
+    
+    // Mark all fields as touched
+    const newTouchedFields = {};
+    fieldNames.forEach(field => {
+      newTouchedFields[field] = true;
+      const isValid = validateField(field, formData[field]);
+      if (!isValid) formIsValid = false;
+    });
+    
+    setTouchedFields(newTouchedFields);
+    return formIsValid;
+  };
+  
+  // Save form data to localStorage
+  useEffect(() => {
+    const saveFormData = () => {
+      if (Object.values(formData).some(value => value)) {
+        localStorage.setItem('contactFormData', JSON.stringify(formData));
+      }
+    };
+    
+    saveFormData();
+  }, [formData]);
+  
+  // Restore form data from localStorage on mount
+  useEffect(() => {
+    const storedData = localStorage.getItem('contactFormData');
+    if (storedData) {
+      try {
+        const parsedData = JSON.parse(storedData);
+        setFormData(parsedData);
+        if (parsedData.description) {
+          setCharCount(parsedData.description.length);
+        }
+      } catch (error) {
+        console.error('Error parsing stored form data:', error);
+      }
+    }
+  }, []);
+  
+  // Clear stored form data after successful submission
+  useEffect(() => {
+    if (submitSuccess) {
+      localStorage.removeItem('contactFormData');
+    }
+  }, [submitSuccess]);
   
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!validateForm()) {
+      // Scroll to the first error
+      const firstErrorField = document.querySelector('[aria-invalid="true"]');
+      if (firstErrorField) {
+        firstErrorField.focus();
+      }
       return;
     }
     
@@ -93,6 +269,7 @@ const ContactSection = () => {
         contactTime: '',
         description: ''
       });
+      setCharCount(0);
       
       // Reset success message after 5 seconds
       setTimeout(() => {
@@ -108,61 +285,119 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="w-full bg-gradient-to-br from-accent/90 via-accent to-accent/90 relative overflow-hidden py-16" id="contact">
+    <section 
+      ref={sectionRef}
+      className="w-full bg-gradient-to-br from-accent/90 via-accent to-accent/90 relative overflow-hidden py-16" 
+      id="contact"
+    >
       {/* Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Geometric Patterns */}
-        <div className="absolute top-0 right-0 w-96 h-96 transform rotate-45 bg-white/5" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 transform -rotate-45 bg-white/5" />
+        <motion.div 
+          className="absolute top-0 right-0 w-96 h-96 transform rotate-45 bg-white/5"
+          initial={{ rotate: 30, opacity: 0 }}
+          animate={isInView ? { rotate: 45, opacity: 1 } : { rotate: 30, opacity: 0 }}
+          transition={{ duration: 1.2 }}
+        />
+        <motion.div 
+          className="absolute bottom-0 left-0 w-96 h-96 transform -rotate-45 bg-white/5"
+          initial={{ rotate: -30, opacity: 0 }}
+          animate={isInView ? { rotate: -45, opacity: 1 } : { rotate: -30, opacity: 0 }}
+          transition={{ duration: 1.2, delay: 0.2 }}
+        />
         
         {/* Dot Pattern */}
-        <div className="absolute top-20 left-20 grid grid-cols-6 gap-4 transform -rotate-12">
+        <motion.div 
+          className="absolute top-20 left-20 grid grid-cols-6 gap-4 transform -rotate-12"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
           {[...Array(24)].map((_, i) => (
-            <div key={i} className="w-2 h-2 bg-white/10 rounded-sm"></div>
+            <motion.div 
+              key={i} 
+              className="w-2 h-2 bg-white/10 rounded-sm"
+              initial={{ scale: 0 }}
+              animate={isInView ? { scale: 1 } : { scale: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 + (i * 0.02) }}
+            ></motion.div>
           ))}
-        </div>
+        </motion.div>
         
         {/* Angular Lines */}
         <div className="absolute bottom-20 right-20">
           {[...Array(3)].map((_, i) => (
-            <div 
+            <motion.div 
               key={i} 
               className="w-16 h-[1px] bg-white/10 transform rotate-45 mb-4"
               style={{ marginLeft: `${i * 1}rem` }}
-            ></div>
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={isInView ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 + (i * 0.1) }}
+            ></motion.div>
           ))}
         </div>
       </div>
 
       <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.7 }}
+        >
           <h2 className="text-white font-xoireqe text-5xl uppercase mb-8">
             Contact Us
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>  
-        </div>
+          <motion.div 
+            className="w-24 h-1 bg-primary mx-auto mb-8"
+            initial={{ width: 0, opacity: 0 }}
+            animate={isInView ? { width: "6rem", opacity: 1 } : { width: 0, opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          ></motion.div>  
+          <p className="text-white/80 max-w-2xl mx-auto">
+            Have questions or need a free estimate? Fill out the form below, and our team will get back to you as soon as possible.
+          </p>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left Column - Info & Map */}
-          <div className="space-y-8">
+          <motion.div 
+            className="space-y-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
             {/* Contact Information */}
             <div className="space-y-6 text-white">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 flex items-center justify-center bg-white/10">
+              <motion.div 
+                className="flex items-start gap-4"
+                variants={contactItemVariants}
+                custom={0}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
                   <MapPin className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
                   <div className="font-edgar uppercase tracking-wider mb-1">Address</div>
                   <address className="text-white/80 not-italic">
-                  1860 SW Fountainview Blvd, #1008<br />
+                    1860 SW Fountainview Blvd, #1008<br />
                     Port St. Lucie, FL 34986
                   </address>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 flex items-center justify-center bg-white/10">
+              <motion.div 
+                className="flex items-start gap-4"
+                variants={contactItemVariants}
+                custom={1}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
                   <Phone className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
@@ -171,23 +406,34 @@ const ContactSection = () => {
                     (954) 868-9893
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 flex items-center justify-center bg-white/10">
+              <motion.div 
+                className="flex items-start gap-4"
+                variants={contactItemVariants}
+                custom={2}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
                   <Mail className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
                 <div>
                   <div className="font-edgar uppercase tracking-wider mb-1">Email</div>
-                  <a href="mailto:flexelectric.fl@gmail.com" className="text-white/80 hover:text-white transition-colors" aria-label="Email us at flexelectric.fl@gmail.com">
+                  <a href="mailto:info@flexelectricfl.com" className="text-white/80 hover:text-white transition-colors" aria-label="Email us at info@flexelectricfl.com">
                     info@flexelectricfl.com
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* Google Map */}
-            <div className="h-[300px] sm:h-[350px] md:h-[250px] lg:h-[300px] relative overflow-hidden rounded-sm">
+            <motion.div 
+              className="h-[300px] sm:h-[350px] md:h-[250px] lg:h-[300px] relative overflow-hidden rounded-sm"
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.3 }}
+            >
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3534.1071143457787!2d-80.39983978491936!3d27.650193982806277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88deeb0ee7d1ded3%3A0x8fc38a3f20345e3b!2s1860%20SW%20Fountainview%20Blvd%2C%20Port%20St.%20Lucie%2C%20FL%2034986!5e0!3m2!1sen!2sus!4v1656946565425!5m2!1sen!2sus" 
                 width="100%"
@@ -196,29 +442,72 @@ const ContactSection = () => {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale contrast-125"
+                className="grayscale hover:grayscale-0 transition-all duration-500 contrast-125"
                 title="Flex Electric location map"
                 aria-label="Google Maps showing our location"
               ></iframe>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Column - Form */}
-          <div className="bg-white/10 backdrop-blur-sm p-8 rounded-sm">
+          <motion.div 
+            className="bg-white/10 backdrop-blur-sm p-8 rounded-sm border border-white/10 shadow-lg"
+            variants={formVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
             {submitSuccess ? (
-              <div className="text-white text-center p-8">
-                <svg className="w-16 h-16 text-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <h3 className="text-2xl font-edgar mb-2">Thank You!</h3>
-                <p>Your message has been sent successfully. We'll get back to you as soon as possible.</p>
-              </div>
+              <motion.div 
+                className="text-white text-center p-8" 
+                aria-live="polite"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                    delay: 0.2
+                  }}
+                >
+                  <CheckCircle className="w-16 h-16 text-primary mx-auto mb-4" />
+                </motion.div>
+                <motion.h3 
+                  className="text-2xl font-edgar mb-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
+                  Thank You!
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                >
+                  Your message has been sent successfully. We'll get back to you as soon as possible.
+                </motion.p>
+                <motion.button
+                  onClick={() => setSubmitSuccess(false)}
+                  className="mt-6 bg-white/20 hover:bg-white/30 text-white py-2 px-4 rounded-sm transition-colors"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.5 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  Send Another Message
+                </motion.button>
+              </motion.div>
             ) : (
               <form className="space-y-6" onSubmit={handleSubmit} noValidate>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-white font-edgar uppercase tracking-wider text-sm mb-2">
-                      Name
+                      Name <span className="text-yellow-300">*</span>
                     </label>
                     <input
                       id="name"
@@ -226,18 +515,24 @@ const ContactSection = () => {
                       type="text"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full p-3 bg-white/10 border ${errors.name ? 'border-yellow-300' : 'border-white/20'} text-white placeholder-white/60
-                               focus:border-white focus:outline-none`}
+                      onBlur={handleBlur}
+                      placeholder="John Doe"
+                      className={`w-full p-3 bg-white/10 border ${touchedFields.name && errors.name ? 'border-yellow-300' : 'border-white/20'} text-white placeholder-white/60
+                               focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none transition-all rounded-sm`}
                       aria-describedby={errors.name ? "name-error" : undefined}
-                      aria-invalid={errors.name ? "true" : "false"}
+                      aria-invalid={touchedFields.name && errors.name ? "true" : "false"}
+                      required
                     />
-                    {errors.name && (
-                      <p id="name-error" className="mt-1 text-yellow-300 text-sm font-semibold">{errors.name}</p>
+                    {touchedFields.name && errors.name && (
+                      <p id="name-error" className="mt-1 text-yellow-300 text-sm font-semibold flex items-center">
+                        <AlertCircle className="w-4 h-4 mr-1" />
+                        {errors.name}
+                      </p>
                     )}
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-white font-edgar uppercase tracking-wider text-sm mb-2">
-                      Email
+                      Email <span className="text-yellow-300">*</span>
                     </label>
                     <input
                       id="email"
@@ -245,13 +540,19 @@ const ContactSection = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full p-3 bg-white/10 border ${errors.email ? 'border-yellow-300' : 'border-white/20'} text-white placeholder-white/60
-                               focus:border-white focus:outline-none`}
+                      onBlur={handleBlur}
+                      placeholder="your.email@example.com"
+                      className={`w-full p-3 bg-white/10 border ${touchedFields.email && errors.email ? 'border-yellow-300' : 'border-white/20'} text-white placeholder-white/60
+                               focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none transition-all rounded-sm`}
                       aria-describedby={errors.email ? "email-error" : undefined}
-                      aria-invalid={errors.email ? "true" : "false"}
+                      aria-invalid={touchedFields.email && errors.email ? "true" : "false"}
+                      required
                     />
-                    {errors.email && (
-                      <p id="email-error" className="mt-1 text-yellow-300 text-sm font-semibold">{errors.email}</p>
+                    {touchedFields.email && errors.email && (
+                      <p id="email-error" className="mt-1 text-yellow-300 text-sm font-semibold flex items-center">
+                        <AlertCircle className="w-4 h-4 mr-1" />
+                        {errors.email}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -259,7 +560,7 @@ const ContactSection = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-white font-edgar uppercase tracking-wider text-sm mb-2">
-                      Phone
+                      Phone <span className="text-yellow-300">*</span>
                     </label>
                     <input
                       id="phone"
@@ -267,13 +568,23 @@ const ContactSection = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      className={`w-full p-3 bg-white/10 border ${errors.phone ? 'border-yellow-300' : 'border-white/20'} text-white placeholder-white/60
-                               focus:border-white focus:outline-none`}
-                      aria-describedby={errors.phone ? "phone-error" : undefined}
-                      aria-invalid={errors.phone ? "true" : "false"}
+                      onBlur={handleBlur}
+                      placeholder="(123) 456-7890"
+                      className={`w-full p-3 bg-white/10 border ${touchedFields.phone && errors.phone ? 'border-yellow-300' : 'border-white/20'} text-white placeholder-white/60
+                               focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none transition-all rounded-sm`}
+                      aria-describedby={errors.phone ? "phone-error" : "phone-hint"}
+                      aria-invalid={touchedFields.phone && errors.phone ? "true" : "false"}
+                      required
                     />
-                    {errors.phone && (
-                      <p id="phone-error" className="mt-1 text-yellow-300 text-sm font-semibold">{errors.phone}</p>
+                    {touchedFields.phone && errors.phone ? (
+                      <p id="phone-error" className="mt-1 text-yellow-300 text-sm font-semibold flex items-center">
+                        <AlertCircle className="w-4 h-4 mr-1" />
+                        {errors.phone}
+                      </p>
+                    ) : (
+                      <p id="phone-hint" className="mt-1 text-white/60 text-xs">
+                        Format: (123) 456-7890
+                      </p>
                     )}
                   </div>
                   <div>
@@ -286,19 +597,19 @@ const ContactSection = () => {
                       value={formData.contactTime}
                       onChange={handleChange}
                       className="w-full p-3 bg-white/10 border border-white/20 text-white
-                               focus:border-white focus:outline-none"
+                               focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none transition-all rounded-sm"
                     >
                       <option value="" className="text-dark">Select a time</option>
-                      <option value="morning" className="text-dark">Morning</option>
-                      <option value="afternoon" className="text-dark">Afternoon</option>
-                      <option value="evening" className="text-dark">Evening</option>
+                      <option value="morning" className="text-dark">Morning (8AM-12PM)</option>
+                      <option value="afternoon" className="text-dark">Afternoon (12PM-5PM)</option>
+                      <option value="evening" className="text-dark">Evening (5PM-8PM)</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="description" className="block text-white font-edgar uppercase tracking-wider text-sm mb-2">
-                    Description
+                    Description <span className="text-yellow-300">*</span>
                   </label>
                   <textarea
                     id="description"
@@ -306,28 +617,55 @@ const ContactSection = () => {
                     rows={4}
                     value={formData.description}
                     onChange={handleChange}
-                    className={`w-full p-3 bg-white/10 border ${errors.description ? 'border-yellow-300' : 'border-white/20'} text-white placeholder-white/60
-                             focus:border-white focus:outline-none`}
-                    aria-describedby={errors.description ? "description-error" : undefined}
-                    aria-invalid={errors.description ? "true" : "false"}
+                    onBlur={handleBlur}
+                    placeholder="Please describe your electrical needs or questions..."
+                    className={`w-full p-3 bg-white/10 border ${touchedFields.description && errors.description ? 'border-yellow-300' : 'border-white/20'} text-white placeholder-white/60
+                             focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none transition-all rounded-sm`}
+                    aria-describedby={errors.description ? "description-error" : "char-count"}
+                    aria-invalid={touchedFields.description && errors.description ? "true" : "false"}
+                    maxLength={maxChars}
+                    required
                   ></textarea>
-                  {errors.description && (
-                    <p id="description-error" className="mt-1 text-yellow-300 text-sm font-semibold">{errors.description}</p>
-                  )}
+                  <div className="flex justify-between items-center mt-1">
+                    {touchedFields.description && errors.description ? (
+                      <p id="description-error" className="text-yellow-300 text-sm font-semibold flex items-center">
+                        <AlertCircle className="w-4 h-4 mr-1" />
+                        {errors.description}
+                      </p>
+                    ) : (
+                      <span></span>
+                    )}
+                    <p id="char-count" className={`text-xs ${charCount > maxChars * 0.9 ? 'text-yellow-300' : 'text-white/60'}`}>
+                      {charCount}/{maxChars} characters
+                    </p>
+                  </div>
                 </div>
 
                 {submitError && (
-                  <div className="p-3 bg-yellow-500/20 border border-yellow-300 text-white text-center rounded-sm">
-                    There was a problem submitting your form. Please try again.
-                  </div>
+                  <motion.div 
+                    className="p-3 bg-yellow-500/20 border border-yellow-300 text-white text-center rounded-sm" 
+                    aria-live="assertive"
+                    role="alert"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="flex items-center justify-center">
+                      <AlertCircle className="w-5 h-5 mr-2 text-yellow-300" />
+                      There was a problem submitting your form. Please try again.
+                    </div>
+                  </motion.div>
                 )}
 
-                <button
+                <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full bg-white hover:bg-white/90 text-accent py-4 px-8 
-                           font-edgar uppercase tracking-wider transition-colors
+                  className={`w-full bg-white hover:bg-white/90 focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-accent focus:outline-none
+                           text-accent py-4 px-8 rounded-sm font-edgar uppercase tracking-wider transition-all
                            ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
+                  whileHover={!isSubmitting ? { y: -3 } : {}}
+                  whileTap={!isSubmitting ? { y: 0 } : {}}
+                  transition={{ duration: 0.2 }}
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
@@ -339,14 +677,18 @@ const ContactSection = () => {
                     </span>
                   ) : (
                     <span className="flex items-center justify-center">
-                    Send Message
-                    <Send className="ml-2 w-5 h-5" />
+                      Send Message
+                      <Send className="ml-2 w-5 h-5" />
                     </span>
                   )}
-                </button>
+                </motion.button>
+                
+                <p className="text-white/60 text-xs text-center">
+                  Fields marked with <span className="text-yellow-300">*</span> are required
+                </p>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

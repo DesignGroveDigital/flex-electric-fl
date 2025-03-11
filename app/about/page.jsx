@@ -155,7 +155,7 @@ export default function AboutPage() {
             >
               <div className="relative z-10">
                 <Image 
-                  src="/gallery/ritz-carlton-2.jpg" 
+                  src="/gallery/APOK-6.png" 
                   alt="Professional electrical installation by Flex Electric" 
                   width={600} 
                   height={400}

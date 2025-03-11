@@ -109,6 +109,7 @@ export default function ServicesPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
+            id='services'
           >
             <h2 className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6">
               Our Electrical Work Covers
@@ -181,7 +182,6 @@ export default function ServicesPage() {
 {/* Service Upgrades Section */}
 <section 
   className="py-16 md:py-24 overflow-hidden"
-  id="services"
   aria-labelledby="service-upgrades-heading"
 >
   <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">

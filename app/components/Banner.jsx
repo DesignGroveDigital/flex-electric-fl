@@ -6,14 +6,6 @@ const PageBannerAngled = ({ title, subtitle, backgroundImage = '/banner-bg.jpg' 
     <section className="w-full bg-dark relative overflow-hidden pt-24">
       {/* Background Container with Angle */}
       <div className="h-[350px] md:h-[420px] relative">
-        {/* Background Image */}
-        <Image
-          src={backgroundImage}
-          alt={title}
-          fill
-          className="object-cover"
-          priority
-        />
         
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-dark/90 to-dark/70" />

@@ -1,55 +1,127 @@
-import React from 'react';
+'use client';
 
-const FloridaMap = () => {
+import React, { useState } from 'react';
+
+const FloridaMap = ({ highlightedCounty, setHighlightedCounty }) => {
   // Service areas
   const serviceAreas = {
-    'Palm Beach': true,
-    'Broward': true,
     'Brevard': true,
-    'St. Lucie': true,
+    'Broward': true,
     'Indian River': true,
+    'St. Lucie': true,
     'Martin': true,
+    'Palm Beach': true,
+  };
+  
+  // Handle hover on county
+  const handleMouseEnter = (county) => {
+    if (setHighlightedCounty) {
+      setHighlightedCounty(county);
+    }
+  };
+  
+  // Handle mouse leave on county
+  const handleMouseLeave = () => {
+    if (setHighlightedCounty) {
+      setHighlightedCounty(null);
+    }
   };
 
   return (
-    <svg 
-      viewBox="0 0 96.4 82.38" 
-      className="w-full h-full rotate-[5deg] translate-y-32"
-      style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))' }}
-    >
-      <style>
-        {`
-          .county {
-            fill: #aba9a9;
-            stroke: #fff;
-            stroke-width: 0.25;
-            transition: all 0.3s ease;
-          }
-          .service-area {
-            fill: #009C1D;
-            opacity: 0.8;
-          }
-          .county:hover {
-            fill: #E25100;
-            opacity: 0.8;
-          }
-          .service-area:hover {
-            opacity: 1;
-          }
-        `}
-      </style>
-      
-      {/* Import all paths from the SVG but modify them */}
-      {React.Children.toArray(
-        Object.entries(paths).map(([county, path]) => (
+    <>
+      {/* County tooltip */}
+      <div 
+        id="county-tooltip" 
+        className="absolute bg-dark/90 text-white px-3 py-1 rounded-sm text-sm font-edgar z-20 shadow-lg transform translate-y-2 opacity-0 pointer-events-none transition-all duration-200"
+      ></div>
+    
+      <svg 
+        viewBox="0 0 96.4 82.38" 
+        className="w-full h-full rotate-[5deg] translate-y-32"
+        style={{ filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))' }}
+      >
+        <defs>
+          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+        
+        <style>
+          {`
+            .county {
+              fill: #aba9a9;
+              stroke: #fff;
+              stroke-width: 0.25;
+              transition: all 0.3s ease;
+              cursor: pointer;
+            }
+            .service-area {
+              fill: #009C1D;
+              opacity: 0.8;
+            }
+            .county:hover {
+              fill: #E25100;
+              opacity: 0.9;
+              filter: url(#glow);
+            }
+            .service-area:hover {
+              opacity: 1;
+              filter: url(#glow);
+            }
+            .highlighted {
+              fill: #E25100 !important;
+              opacity: 1 !important;
+              filter: url(#glow);
+              stroke-width: 0.5;
+            }
+          `}
+        </style>
+        
+        {/* Map all paths with explicit keys */}
+        {Object.entries(paths).map(([county, path]) => (
           <path
+            key={`county-${county}`}
             d={path}
-            className={`county ${serviceAreas[county] ? 'service-area' : ''}`}
+            className={`county ${serviceAreas[county] ? 'service-area' : ''} ${highlightedCounty === county ? 'highlighted' : ''}`}
             data-county={county}
+            onMouseEnter={(e) => {
+              // Show tooltip
+              const tooltip = document.getElementById('county-tooltip');
+              if (tooltip) {
+                tooltip.textContent = county;
+                tooltip.style.opacity = '1';
+                tooltip.style.transform = 'translate(0, 0)';
+                
+                // Position tooltip
+                const svgRect = e.currentTarget.ownerSVGElement.getBoundingClientRect();
+                const pathRect = e.currentTarget.getBoundingClientRect();
+                const tooltipRect = tooltip.getBoundingClientRect();
+                
+                // Calculate position relative to SVG
+                const left = pathRect.left - svgRect.left + (pathRect.width / 2) - (tooltipRect.width / 2);
+                const top = pathRect.top - svgRect.top - tooltipRect.height - 10;
+                
+                tooltip.style.left = `${left}px`;
+                tooltip.style.top = `${top}px`;
+              }
+              
+              handleMouseEnter(county);
+            }}
+            onMouseLeave={() => {
+              // Hide tooltip
+              const tooltip = document.getElementById('county-tooltip');
+              if (tooltip) {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translate(0, 2px)';
+              }
+              
+              handleMouseLeave();
+            }}
           />
-        ))
-      )}
-    </svg>
+        ))}
+      </svg>
+    </>
   );
 };
 
