@@ -6,7 +6,7 @@ import PageBannerAngled from '../components/Banner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight, Lightbulb, X } from 'lucide-react';
 
-// Updated gallery images using actual image files
+// Updated gallery images with new categories: Commercial, Infrastructure, Multi-family
 const galleryImages = [
     {
       src: '/gallery/20240503_120009.jpg',
@@ -29,73 +29,73 @@ const galleryImages = [
     {
       src: '/gallery/750963561.jpg',
       alt: 'Underground electrical conduit installation',
-      category: 'commercial',
+      category: 'infrastructure',
       title: 'Electrical Infrastructure'
     },
     {
       src: '/gallery/apoc-town-homes.jpg',
       alt: 'Modern town home electrical installation',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Town Home Electrical'
     },
     {
       src: '/gallery/APOK-5.png',
       alt: 'Aerial view of residential development',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Residential Development'
     },
     {
       src: '/gallery/APOK-6.png',
       alt: 'Overhead view of apartment complex',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Apartment Complex'
     },
     {
       src: '/gallery/APOK TOWN HOMES.png',
       alt: 'Modern townhome development with electrical installations',
-      category: 'residential',
+      category: 'multi-family',
       title: 'APOK Townhomes'
     },
     {
       src: '/gallery/APOK Townhomes -  Boca Raton Florida 1.jpg',
       alt: 'Townhomes in Boca Raton with electrical work',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Boca Raton Townhomes'
     },
     {
       src: '/gallery/APOK TOWNHOMES-1.png',
       alt: 'Front view of townhome development',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Townhome Electrical Project'
     },
     {
       src: '/gallery/APOK TOWNHOMES-2.png',
       alt: 'Side view of townhome complex',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Townhome Complex'
     },
     {
       src: '/gallery/APOK TOWNHOMES-3.png',
       alt: 'Front entrance of townhome development',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Townhome Entrance'
     },
     {
       src: '/gallery/APOK TOWNHOMES-4.png',
       alt: 'Aerial view of completed townhome development',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Completed Townhome Development'
     },
     {
       src: '/gallery/APOK-7.png',
       alt: 'Modern residential courtyard with electrical fixtures',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Residential Courtyard'
     },
     {
       src: '/gallery/cede-luxury-apartments.jpg',
       alt: 'Luxury apartment electrical installation',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Luxury Apartment'
     },
     {
@@ -137,13 +137,13 @@ const galleryImages = [
     {
       src: '/gallery/infrastructure.jpg',
       alt: 'Electrical infrastructure installation',
-      category: 'commercial',
+      category: 'infrastructure',
       title: 'Infrastructure Development'
     },
     {
       src: '/gallery/panel-1.jpg',
       alt: 'Professional electrical panel installation',
-      category: 'commercial',
+      category: 'infrastructure',
       title: 'Electrical Panel Installation'
     },
     {
@@ -161,25 +161,25 @@ const galleryImages = [
     {
       src: '/gallery/SAILFISH COVE APARTMENTS.jpg',
       alt: 'Sailfish Cove apartment complex electrical',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Sailfish Cove Apartments'
     },
     {
       src: '/gallery/SAILFISHCOVE.jpg',
       alt: 'Sailfish Cove residential development',
-      category: 'residential',
+      category: 'multi-family',
       title: 'Sailfish Cove Development'
     },
     {
       src: '/gallery/SFC Meter Rm.-1.jpg',
       alt: 'Specialized electrical meter room installation',
-      category: 'commercial',
+      category: 'infrastructure',
       title: 'Meter Room Installation'
     },
     {
       src: '/gallery/SFC METER RM.jpg',
       alt: 'Complete meter room setup',
-      category: 'commercial',
+      category: 'infrastructure',
       title: 'Complete Meter Room'
     },
     {
@@ -266,7 +266,7 @@ export default function GalleryPage() {
     <main className="bg-white">
       <PageBannerAngled 
         title="Our Work" 
-        subtitle="View our portfolio of commercial and residential electrical projects"
+        subtitle="View our portfolio of commercial, infrastructure, and multi-family electrical projects"
       />
       
       {/* Featured Projects Carousel */}
@@ -289,7 +289,7 @@ export default function GalleryPage() {
             transition={{ duration: 0.8, delay: 0.3 }}
           />
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Explore our showcase of recent electrical projects for homes and businesses throughout South Florida.
+            Explore our showcase of recent electrical projects for commercial buildings, infrastructure, and multi-family developments throughout South Florida.
           </p>
         </motion.div>
         
@@ -355,7 +355,7 @@ export default function GalleryPage() {
                 </h2>
               </div>
               <p className="text-white/90 text-lg">
-                Whether you need electrical services for your home or business, our team is ready to bring your project to life with the same quality and expertise showcased in our gallery.
+                Whether you need electrical services for commercial buildings, infrastructure projects, or multi-family developments, our team is ready to bring your project to life with the same quality and expertise showcased in our gallery.
               </p>
             </div>
             
@@ -441,7 +441,7 @@ export default function GalleryPage() {
                 {modalImages[currentModalImageIndex].title}
               </h3>
               <p className="text-gray-300">
-                {modalImages[currentModalImageIndex].category === 'commercial' ? 'Commercial Project' : 'Residential Project'}
+                {getCategoryLabel(modalImages[currentModalImageIndex].category)}
               </p>
             </div>
 
@@ -454,6 +454,20 @@ export default function GalleryPage() {
       )}
     </main>
   );
+}
+
+// Helper function to get user-friendly category labels
+function getCategoryLabel(category) {
+  switch(category) {
+    case 'commercial':
+      return 'Commercial Project';
+    case 'infrastructure':
+      return 'Infrastructure Project';
+    case 'multi-family':
+      return 'Multi-Family Project';
+    default:
+      return 'Project';
+  }
 }
 
 // Modified Carousel Component with Modal Support
@@ -523,7 +537,7 @@ const ImageCarouselWithModal = ({ images, openModal }) => {
                 {images[currentIndex].title}
               </h3>
               <p className="text-white/80">
-                {images[currentIndex].category === 'commercial' ? 'Commercial Project' : 'Residential Project'}
+                {getCategoryLabel(images[currentIndex].category)}
               </p>
             </div>
           </div>
@@ -579,7 +593,7 @@ const ImageCarouselWithModal = ({ images, openModal }) => {
   );
 };
 
-// Modified Grid Component with Modal Support
+// Modified Grid Component with Modal Support and Updated Filter Categories
 const ImageGridWithModal = ({ images, openModal }) => {
   const [filter, setFilter] = useState('all');
   const [activeImages, setActiveImages] = useState(images);
@@ -594,7 +608,7 @@ const ImageGridWithModal = ({ images, openModal }) => {
 
   return (
     <div>
-      {/* Filter Buttons */}
+      {/* Filter Buttons with Updated Categories */}
       <div className="flex flex-wrap justify-center gap-4 mb-8">
         <button 
           onClick={() => setFilter('all')} 
@@ -617,14 +631,24 @@ const ImageGridWithModal = ({ images, openModal }) => {
           Commercial
         </button>
         <button 
-          onClick={() => setFilter('residential')} 
+          onClick={() => setFilter('infrastructure')} 
           className={`px-4 py-2 rounded-sm font-edgar tracking-wider transition-colors ${
-            filter === 'residential' 
+            filter === 'infrastructure' 
               ? 'bg-primary text-white' 
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          Residential
+          Infrastructure
+        </button>
+        <button 
+          onClick={() => setFilter('multi-family')} 
+          className={`px-4 py-2 rounded-sm font-edgar tracking-wider transition-colors ${
+            filter === 'multi-family' 
+              ? 'bg-primary text-white' 
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+        >
+          Multi-Family
         </button>
       </div>
 
@@ -660,7 +684,7 @@ const ImageGridWithModal = ({ images, openModal }) => {
                 <div className="absolute bottom-0 left-0 p-4 text-white">
                   <h3 className="text-lg font-edgar">{image.title}</h3>
                   <p className="text-sm text-white/80">
-                    {image.category === 'commercial' ? 'Commercial Project' : 'Residential Project'}
+                    {getCategoryLabel(image.category)}
                   </p>
                 </div>
                 <div className="absolute top-4 right-4 bg-dark/70 text-white text-sm py-1 px-3 rounded-sm">

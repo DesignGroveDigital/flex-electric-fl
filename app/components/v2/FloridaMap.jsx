@@ -11,6 +11,7 @@ const FloridaMap = ({ highlightedCounty, setHighlightedCounty }) => {
     'St. Lucie': true,
     'Martin': true,
     'Palm Beach': true,
+    'Miami-Dade': true
   };
   
   // Handle hover on county

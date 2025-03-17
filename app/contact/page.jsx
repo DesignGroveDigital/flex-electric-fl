@@ -354,7 +354,7 @@ export default function ContactPage() {
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Flex Electric location map"
-                className="grayscale hover:grayscale-0 transition-all duration-500"
+                className=" transition-all duration-500"
               ></iframe>
             </motion.div>
             

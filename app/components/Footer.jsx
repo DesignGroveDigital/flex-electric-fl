@@ -60,7 +60,7 @@ const Footer = () => {
                   <h3 className="font-edgar text-white uppercase tracking-wider">Service Areas</h3>
                 </div>
                 <p className="text-white/70">
-                  Brevard, Indian River, Saint Lucie, Martin, Palm Beach, and Broward Counties
+                  Brevard, Indian River, Saint Lucie, Martin, Palm Beach, Broward Counties, and Miami-Dade County.
                 </p>
               </div>
             </div>
@@ -193,8 +193,9 @@ const Footer = () => {
           <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="text-white/60 text-sm">
-                © {new Date().getFullYear()} Flex Electric, Inc. All rights reserved.
+                © {new Date().getFullYear()} Flex Electric, Inc. All rights reserved.<a href='/sitemap.xml' className='text-xs hover:underline border-l border-white/60 px-2 mx-2'>Sitemap</a>
               </p>
+
               <p className="text-white/60 text-sm">
                 Website by{' '}
                 <a 

@@ -16,7 +16,8 @@ const ServiceAreaSection = () => {
     'St. Lucie County',
     'Martin County',
     'Palm Beach County',
-    'Broward County'
+    'Broward County',
+    'Miami-Dade County'
   ];
   
   // Animation variants

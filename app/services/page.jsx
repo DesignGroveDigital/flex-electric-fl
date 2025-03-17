@@ -220,7 +220,7 @@ export default function ServicesPage() {
           id="service-upgrades-heading"
           className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6"
         >
-          Request Electrical Service Upgrades
+          Get In Touch Today For Service Upgrades
         </h2>
         <motion.div 
           className="h-1 w-0 bg-primary mb-8"
@@ -259,7 +259,7 @@ export default function ServicesPage() {
             className="bg-dark hover:bg-dark/90 text-white font-edgar uppercase tracking-wider py-3 px-6 inline-flex items-center transition-colors rounded-sm"
             aria-label="Contact us to request electrical service upgrades"
           >
-            <span className="mr-2">Contact Us Today</span>
+            <span className="mr-2">Request A Quote</span>
             <ArrowRight className="w-5 h-5" aria-hidden="true" />
           </a>
         </motion.div>

@@ -442,7 +442,7 @@ const ContactSection = () => {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale hover:grayscale-0 transition-all duration-500 contrast-125"
+                className=" transition-all duration-500 contrast-125"
                 title="Flex Electric location map"
                 aria-label="Google Maps showing our location"
               ></iframe>
