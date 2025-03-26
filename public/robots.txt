@@ -1,0 +1,14 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /admin
+Disallow: /private
+
+# Host
+Host: https://flexelectricfl.com
+
+# Sitemaps
+Sitemap: https://flexelectricfl.com/sitemap.xml

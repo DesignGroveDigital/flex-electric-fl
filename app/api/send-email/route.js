@@ -8,7 +8,7 @@ export async function POST(req) {
 
         const msg = {
             from: process.env.EMAIL_USER,
-            to: 'crossstitchcurator@gmail.com', // Change to client email for production
+            to: 'leads@flexelectricfl.com', // Change to client email for production
             subject: `Website Lead from - ${name}`,
             text: `
         Name: ${name}

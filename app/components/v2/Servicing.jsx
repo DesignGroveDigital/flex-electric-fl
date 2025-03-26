@@ -53,9 +53,6 @@ const ServiceAreaSection = () => {
       <div className="absolute top-0 left-0 w-72 sm:w-96 h-72 sm:h-96 transform -rotate-45 bg-gradient-to-tl from-primary/5 to-transparent" />
       <div className="absolute bottom-0 right-0 w-72 sm:w-96 h-72 sm:h-96 transform rotate-45 bg-gradient-to-br from-accent/5 to-transparent" />
       
-      {/* Subtle Grid Pattern */}
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-5"></div>
-      
       <motion.div 
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative"
         initial="hidden"
