@@ -77,7 +77,7 @@ export default function AboutPage() {
             >
               <div className="relative z-10">
                 <Image 
-                  src="/gallery/IMG_0277.jpg" 
+                  src="/gallery/infrastructure-2.jpg" 
                   alt="Flex Electric professional electrician" 
                   width={600} 
                   height={600}
