@@ -27,12 +27,6 @@ const galleryImages = [
       title: 'Commercial Development'
     },
     {
-      src: '/gallery/750963561.jpg',
-      alt: 'Underground electrical conduit installation',
-      category: 'infrastructure',
-      title: 'Electrical Infrastructure'
-    },
-    {
       src: '/gallery/apoc-town-homes.jpg',
       alt: 'Modern town home electrical installation',
       category: 'multi-family',
@@ -193,6 +187,48 @@ const galleryImages = [
       alt: 'Exterior view of TGB Civic Center',
       category: 'commercial',
       title: 'TGB Civic Center Exterior'
+    },
+    {
+      src: '/gallery/infrastructure-4.jpg',
+      alt: 'Underground electrical conduit installation',
+      category: 'infrastructure',
+      title: 'Electrical Infrastructure'
+    },
+    {
+      src: '/gallery/infrastructure-5.jpg',
+      alt: 'Underground electrical installation',
+      category: 'infrastructure',
+      title: 'Underground Electrical'
+    },
+    {
+      src: '/gallery/infrastructure-6.jpg',
+      alt: 'Conduit bundles for electrical infrastructure',
+      category: 'infrastructure',
+      title: 'Conduit Bundles'
+    },
+    {
+      src: '/gallery/infrastructure-7.jpg',
+      alt: 'Conduit bundles for electrical infrastructure',
+      category: 'infrastructure',
+      title: 'Conduit Bundles'
+    },
+    {
+      src: '/gallery/infrastructure-8.jpg',
+      alt: 'Underground electrical installation',
+      category: 'infrastructure',
+      title: 'Underground Electrical'
+    },
+    {
+      src: '/gallery/infrastructure-9.jpg',
+      alt: 'Large spools of electrical wire',
+      category: 'infrastructure',
+      title: 'Electrical Wire Spools'
+    },
+    {
+      src: '/gallery/meter-4.jpg',
+      alt: 'Electrical meter installation',
+      category: 'infrastructure',
+      title: 'Meter Installation'
     }
   ];
 
