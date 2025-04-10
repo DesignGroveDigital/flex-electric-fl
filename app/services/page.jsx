@@ -81,7 +81,7 @@ export default function ServicesPage() {
     <main className="bg-white">
       <PageBannerAngled 
         title="Our Services" 
-        subtitle="Professional electrical solutions for residential and commercial needs"
+        subtitle="Professional electrical solutions for commercial and industrial needs."
         backgroundImage="/services-banner.jpg"
       />
       
@@ -230,7 +230,7 @@ export default function ServicesPage() {
           transition={{ duration: 0.8, delay: 0.3 }}
         />
         <p className="text-lg text-gray-700 mb-6 break-words">
-          Make sure that your property meets code and is free from electrical issues. At Flex Electric, Inc., we have a range of services to help maintain electrical safety in your home or office. Whether it's data wiring, heat installation, or fire alarm installation, we're here to help.
+          Make sure that your property meets code and is free from electrical issues. At Flex Electric, Inc., we have a range of services to help maintain electrical safety in your commercial or industrial space. Whether it's data wiring, heat installation, or fire alarm installation, we're here to help.
         </p>
         
         <motion.div 
@@ -412,7 +412,7 @@ function IntroductionSection() {
               }
             }}
           >
-            Providing superior electrical services for homes and businesses has put Flex Electric, Inc. in Pompano Beach, FL at the forefront of the industry. We specialize in new construction electrical services and service upgrades, as well as other solutions to improve home and office electrical systems. Whatever your need, entrust your residential or commercial electrical work to us.
+            Providing superior electrical services for businesses has put Flex Electric, Inc. in South Florida at the forefront of the industry. We specialize in new construction electrical services and service upgrades, as well as other solutions to improve your electrical systems. Whatever your need, entrust your commercial or industrial electrical work to us.
           </motion.p>
   
           <motion.div

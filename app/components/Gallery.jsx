@@ -18,10 +18,10 @@ const GallerySection = () => {
   // Example gallery items - replace with actual data
   const galleryItems = [
     {
-      id: 6,
-      title: 'Commercial Wiring',
-      category: 'Commercial',
-      imageUrl: '/gallery/commercial-1.jpg',
+      id: 1,
+      title: 'Power Plant Installation',
+      category: 'Industrial',
+      imageUrl: '/gallery/industrial-3.jpg',
     },
     {
       id: 2,
@@ -30,25 +30,25 @@ const GallerySection = () => {
       imageUrl: '/gallery/ritz-carlton.jpg',
     },
     {
-      id: 3,
-      title: 'Panel Upgrade',
-      category: 'Residential',
-      imageUrl: '/gallery/panel-1.jpg',
-    },
-    {
-      id: 4,
-      title: 'Electrical Installation',
+      id: 6,
+      title: 'Commercial Wiring',
       category: 'Commercial',
-      imageUrl: '/gallery/infrastructure.jpg',
+      imageUrl: '/gallery/commercial-1.jpg',
     },
     {
       id: 5,
       title: 'Town Home Interior',
-      category: 'Commercial',
+      category: 'Multi-Family',
       imageUrl: '/gallery/apoc-town-homes.jpg',
     },
     {
-      id: 1,
+      id: 3,
+      title: 'Panel Upgrade',
+      category: 'Commercial',
+      imageUrl: '/gallery/panel-1.jpg',
+    },
+    {
+      id: 4,
       title: 'Golden Beach Civic Center',
       category: 'Commercial',
       imageUrl: '/gallery/golden-beach-civic-center.jpg',

@@ -133,7 +133,7 @@ const AboutSection = () => {
                 Flex Electric, Inc. is a family-owned and operated electrical company, 
                 fully licensed and insured, with over 30 years of combined knowledge 
                 and experience providing full electrical service in all areas of the 
-                electrical industry whether it be residential or commercial.
+                electrical industry whether it be commercial or industrial.
               </p>
 
               {/* Feature Points with Counter Animation */}

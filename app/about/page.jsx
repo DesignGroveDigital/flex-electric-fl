@@ -49,7 +49,8 @@ export default function AboutPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                Flex Electric, Inc. is a family-owned and operated electrical company, fully licensed and insured, with over 30 years of combined knowledge and experience providing full electrical service throughout South Florida.
+                Flex Electric, Inc. is a family-owned and operated electrical company, fully licensed and insured, with over 
+                30 years of combined knowledge and experience providing full electrical service throughout South Florida.
               </motion.p>
               <motion.p 
                 className="text-lg text-gray-700 mb-6"
@@ -57,7 +58,10 @@ export default function AboutPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                Based in Pompano Beach, Florida, we've built our reputation on delivering exceptional electrical services for both residential and commercial projects. Our team of highly-trained electricians approaches each job with the same level of dedication and professionalism, whether it's a small home repair or a large-scale commercial installation.
+                Based in Pompano Beach, Florida, we've built our reputation on delivering exceptional electrical services 
+                for both commercial and industrial projects. Our team of highly-trained electricians approaches each job 
+                with the same level of dedication and professionalism, whether it's a small commercial or a large-scale 
+                industrial installation.
               </motion.p>
               <motion.p 
                 className="text-lg text-gray-700"
@@ -65,7 +69,9 @@ export default function AboutPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                At Flex Electric, our goal is to create long-term relationships with our clients through quality workmanship, transparent communication, and reliable service. We take great pride in our ability to solve complex electrical challenges while maintaining the highest standards of safety and customer satisfaction.
+                At Flex Electric, our goal is to create long-term relationships with our clients through quality workmanship, 
+                transparent communication, and reliable service. We take great pride in our ability to solve complex 
+                electrical challenges while maintaining the highest standards of safety and customer satisfaction.
               </motion.p>
             </div>
             
@@ -173,15 +179,20 @@ export default function AboutPage() {
             >
               <div className="space-y-6">
                 <p className="text-lg text-gray-700">
-                  Our professionally trained team is reliable, courteous, and trustworthy. You won't have to worry about unsafe workmanship. We take pride in the quality of our work by ensuring that all work is completed to your satisfaction in a convenient and timely way.
+                  Our professionally trained team is reliable, courteous, and trustworthy. You won't have to worry about 
+                  unsafe workmanship. We take pride in the quality of our work by ensuring that all work is completed to 
+                  your satisfaction in a convenient and timely way.
                 </p>
                 
                 <p className="text-lg text-gray-700">
-                  Our priority is to provide you with the highest quality of work affordable to your budget. You can put your mind at ease knowing we are available in cases of emergency.
+                  Our priority is to provide you with the highest quality of work affordable to your budget. You can put 
+                  your mind at ease knowing we are available in cases of emergency.
                 </p>
                 
                 <p className="text-lg text-gray-700">
-                  At Flex Electric, Inc., our goal is to create a long-term relationship based on trust with our clients. We strive to become the preferred electrical service provider of homes and businesses in our community and the surrounding area.
+                  At Flex Electric, Inc., our goal is to create a long-term relationship based on trust with our clients. 
+                  We strive to become the preferred electrical service provider of businesses and industries in our 
+                  community and the surrounding area.
                 </p>
                 
                 <div className="pt-4">
