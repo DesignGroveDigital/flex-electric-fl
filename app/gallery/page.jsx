@@ -6,6 +6,15 @@ import PageBannerAngled from '../components/Banner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight, Lightbulb, X } from 'lucide-react';
 
+const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 // Updated gallery images with new categories: Commercial, Infrastructure, Multi-family
 const galleryImages = [
     {
@@ -51,28 +60,10 @@ const galleryImages = [
       title: 'APOK Townhomes'
     },
     {
-      src: '/gallery/APOK Townhomes -  Boca Raton Florida 1.jpg',
-      alt: 'Townhomes in Boca Raton with electrical work',
-      category: 'multi-family',
-      title: 'Boca Raton Townhomes'
-    },
-    {
       src: '/gallery/APOK TOWNHOMES-1.png',
       alt: 'Front view of townhome development',
       category: 'multi-family',
       title: 'Townhome Electrical Project'
-    },
-    {
-      src: '/gallery/APOK TOWNHOMES-2.png',
-      alt: 'Side view of townhome complex',
-      category: 'multi-family',
-      title: 'Townhome Complex'
-    },
-    {
-      src: '/gallery/APOK TOWNHOMES-3.png',
-      alt: 'Front entrance of townhome development',
-      category: 'multi-family',
-      title: 'Townhome Entrance'
     },
     {
       src: '/gallery/APOK TOWNHOMES-4.png',
@@ -85,12 +76,6 @@ const galleryImages = [
       alt: 'Modern residential courtyard with electrical fixtures',
       category: 'multi-family',
       title: 'Residential Courtyard'
-    },
-    {
-      src: '/gallery/cede-luxury-apartments.jpg',
-      alt: 'Luxury apartment electrical installation',
-      category: 'multi-family',
-      title: 'Luxury Apartment'
     },
     {
       src: '/gallery/commercial-1.jpg',
@@ -229,7 +214,61 @@ const galleryImages = [
       alt: 'Electrical meter installation',
       category: 'infrastructure',
       title: 'Meter Installation'
-    }
+    },
+    {
+    src: '/gallery/healthcare-1.png',
+    alt: 'Healthcare facility electrical installation',
+    category: 'healthcare',
+    title: 'Good Samaritan Medical Center'
+    },
+    {
+    src: '/gallery/industrial-1.jpg',
+    alt: 'Industrial power plant',
+    category: 'industrial',
+    title: 'Industrial Power Plant'
+    },
+    {
+    src: '/gallery/industrial-2.jpg',
+    alt: 'Industrial power plant with electrical systems',
+    category: 'industrial',
+    title: 'Industrial Power Plant'
+    },
+    {
+    src: '/gallery/industrial-3.jpg',
+    alt: 'Industrial power plant with electrical systems',
+    category: 'industrial',
+    title: 'Industrial Power Plant'
+    },
+    {
+      src: '/gallery/GULF STREAM VIEWS TOWNHOMES.png',
+      alt: 'Gulf Stream Views Townhomes electrical installation project',
+      category: 'multi-family',
+      title: 'Gulf Stream Views Townhomes'
+    },
+    {
+      src: '/gallery/infrastructure-10.jpg',
+      alt: 'Construction equipment for electrical infrastructure',
+      category: 'infrastructure',
+      title: 'Construction Machinery'
+    },
+    {
+      src: '/gallery/infrastructure-11.jpg',
+      alt: 'Electrical infrastructure installation',
+      category: 'infrastructure',
+      title: 'Electrical Infrastructure'
+    },
+    {
+      src: '/gallery/infrastructure-12.jpg',
+      alt: 'Electrical infrastructure installation with conduit',
+      category: 'infrastructure',
+      title: 'Electrical Conduit Installation'
+    },
+    {
+      src: '/gallery/infrastructure-13.jpg',
+      alt: 'Flex electric team working on electrical infrastructure',
+      category: 'infrastructure',
+      title: 'Flex Electric Team at Work'
+    },
   ];
 
 // Main Gallery Page Component with added Image Modal
@@ -238,6 +277,12 @@ export default function GalleryPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentModalImageIndex, setCurrentModalImageIndex] = useState(0);
   const [modalImages, setModalImages] = useState([]);
+
+  const [randomizedGallery, setRandomizedGallery] = useState([]);
+
+  useEffect(() => {
+    setRandomizedGallery(shuffleArray(galleryImages));
+  }, []);
 
   // Open modal with specific image
   const openModal = (images, index) => {
@@ -302,7 +347,7 @@ export default function GalleryPage() {
     <main className="bg-white">
       <PageBannerAngled 
         title="Our Work" 
-        subtitle="View our portfolio of commercial, infrastructure, and multi-family electrical projects"
+        subtitle="View our portfolio of commercial, industrial, and multi-family electrical projects"
       />
       
       {/* Featured Projects Carousel */}
@@ -325,7 +370,7 @@ export default function GalleryPage() {
             transition={{ duration: 0.8, delay: 0.3 }}
           />
           <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-            Explore our showcase of recent electrical projects for commercial buildings, infrastructure, and multi-family developments throughout South Florida.
+            Explore our showcase of recent electrical projects for commercial buildings, industrial complexes, infrastructure, and multi-family developments throughout South Florida.
           </p>
         </motion.div>
         
@@ -501,6 +546,10 @@ function getCategoryLabel(category) {
       return 'Infrastructure Project';
     case 'multi-family':
       return 'Multi-Family Project';
+    case 'healthcare':
+      return 'Healthcare Project';
+    case 'industrial':
+      return 'Industrial Project';
     default:
       return 'Project';
   }
@@ -632,22 +681,43 @@ const ImageCarouselWithModal = ({ images, openModal }) => {
 // Modified Grid Component with Modal Support and Updated Filter Categories
 const ImageGridWithModal = ({ images, openModal }) => {
   const [filter, setFilter] = useState('all');
-  const [activeImages, setActiveImages] = useState(images);
+  const [activeImages, setActiveImages] = useState([]);
+
+  const categoryImagesRef = useRef({
+    all: [],
+    commercial: [],
+    industrial: [],
+    infrastructure: [],
+    'multi-family': [],
+    healthcare: []
+  });
 
   useEffect(() => {
-    if (filter === 'all') {
-      setActiveImages(images);
-    } else {
-      setActiveImages(images.filter(img => img.category === filter));
-    }
-  }, [filter, images]);
-
+    // Randomize all images
+    categoryImagesRef.current.all = shuffleArray(images);
+    
+    // Randomize each category separately
+    const categories = ['commercial', 'industrial', 'infrastructure', 'multi-family', 'healthcare'];
+    categories.forEach(category => {
+      const categoryImages = images.filter(img => img.category === category);
+      categoryImagesRef.current[category] = shuffleArray(categoryImages);
+    });
+    
+    // Set initial active images
+    setActiveImages(categoryImagesRef.current.all);
+  }, [images]);
+  
+  // Use the pre-randomized arrays when changing filters
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+    setActiveImages(categoryImagesRef.current[newFilter]);
+  };
   return (
     <div>
       {/* Filter Buttons with Updated Categories */}
       <div className="flex flex-wrap justify-center gap-4 mb-8">
         <button 
-          onClick={() => setFilter('all')} 
+          onClick={() => handleFilterChange('all')} 
           className={`px-4 py-2 rounded-sm font-edgar tracking-wider transition-colors ${
             filter === 'all' 
               ? 'bg-primary text-white' 
@@ -657,7 +727,7 @@ const ImageGridWithModal = ({ images, openModal }) => {
           All Projects
         </button>
         <button 
-          onClick={() => setFilter('commercial')} 
+          onClick={() => handleFilterChange('commercial')} 
           className={`px-4 py-2 rounded-sm font-edgar tracking-wider transition-colors ${
             filter === 'commercial' 
               ? 'bg-primary text-white' 
@@ -666,8 +736,18 @@ const ImageGridWithModal = ({ images, openModal }) => {
         >
           Commercial
         </button>
+        <button
+          onClick={() => handleFilterChange('industrial')} 
+          className={`px-4 py-2 rounded-sm font-edgar tracking-wider transition-colors ${
+            filter === 'industrial' 
+              ? 'bg-primary text-white' 
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+        >
+          Industrial
+        </button>
         <button 
-          onClick={() => setFilter('infrastructure')} 
+          onClick={() => handleFilterChange('infrastructure')} 
           className={`px-4 py-2 rounded-sm font-edgar tracking-wider transition-colors ${
             filter === 'infrastructure' 
               ? 'bg-primary text-white' 
@@ -677,7 +757,7 @@ const ImageGridWithModal = ({ images, openModal }) => {
           Infrastructure
         </button>
         <button 
-          onClick={() => setFilter('multi-family')} 
+          onClick={() => handleFilterChange('multi-family')} 
           className={`px-4 py-2 rounded-sm font-edgar tracking-wider transition-colors ${
             filter === 'multi-family' 
               ? 'bg-primary text-white' 
@@ -685,6 +765,16 @@ const ImageGridWithModal = ({ images, openModal }) => {
           }`}
         >
           Multi-Family
+        </button>
+        <button 
+          onClick={() => handleFilterChange('healthcare')} 
+          className={`px-4 py-2 rounded-sm font-edgar tracking-wider transition-colors ${
+            filter === 'healthcare' 
+              ? 'bg-primary text-white' 
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+        >
+          Healthcare
         </button>
       </div>
 
