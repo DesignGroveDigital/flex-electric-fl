@@ -238,7 +238,37 @@ const galleryImages = [
     alt: 'Industrial power plant with electrical systems',
     category: 'industrial',
     title: 'Industrial Power Plant'
-    }
+    },
+    {
+      src: '/gallery/GULF STREAM VIEWS TOWNHOMES.png',
+      alt: 'Gulf Stream Views Townhomes electrical installation project',
+      category: 'multi-family',
+      title: 'Gulf Stream Views Townhomes'
+    },
+    {
+      src: '/gallery/infrastructure-10.jpg',
+      alt: 'Construction equipment for electrical infrastructure',
+      category: 'infrastructure',
+      title: 'Construction Machinery'
+    },
+    {
+      src: '/gallery/infrastructure-11.jpg',
+      alt: 'Electrical infrastructure installation',
+      category: 'infrastructure',
+      title: 'Electrical Infrastructure'
+    },
+    {
+      src: '/gallery/infrastructure-12.jpg',
+      alt: 'Electrical infrastructure installation with conduit',
+      category: 'infrastructure',
+      title: 'Electrical Conduit Installation'
+    },
+    {
+      src: '/gallery/infrastructure-13.jpg',
+      alt: 'Flex electric team working on electrical infrastructure',
+      category: 'infrastructure',
+      title: 'Flex Electric Team at Work'
+    },
   ];
 
 // Main Gallery Page Component with added Image Modal
