@@ -6,6 +6,7 @@ Allow: /
 User-agent: *
 Disallow: /admin
 Disallow: /private
+Disallow: /v2
 
 # Host
 Host: https://flexelectricfl.com

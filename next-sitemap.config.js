@@ -5,14 +5,14 @@ module.exports = {
     changefreq: 'weekly',
     priority: 0.7,
     sitemapSize: 5000,
-    exclude: ['/admin/*', '/private/*'], // Add any paths you want to exclude
+    exclude: ['/admin/*', '/private/*', 'v2'], // Add any paths you want to exclude
     robotsTxtOptions: {
       additionalSitemaps: [
         // Add any additional sitemaps if needed
       ],
       policies: [
         { userAgent: '*', allow: '/' },
-        { userAgent: '*', disallow: ['/admin', '/private'] }
+        { userAgent: '*', disallow: ['/admin', '/private', 'v2'] }
       ]
     }
   }
