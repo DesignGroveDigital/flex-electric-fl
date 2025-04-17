@@ -58,7 +58,7 @@ export default function AboutPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                Based in Pompano Beach, Florida, we've built our reputation on delivering exceptional electrical services 
+                Based in Port St. Lucie, Florida, we've built our reputation on delivering exceptional electrical services 
                 for both commercial and industrial projects. Our team of highly-trained electricians approaches each job 
                 with the same level of dedication and professionalism, whether it's a small commercial or a large-scale 
                 industrial installation.
