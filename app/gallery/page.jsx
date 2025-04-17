@@ -269,6 +269,36 @@ const galleryImages = [
       category: 'infrastructure',
       title: 'Flex Electric Team at Work'
     },
+    {
+      src: '/gallery/industrial-4.jpg',
+      alt: 'Industrial electrical systems installation at APP Jet Center',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
+    {
+      src: '/gallery/industrial-5.jpg',
+      alt: 'Industrial electrical systems installation at APP Jet Center',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
+    {
+      src: '/gallery/industrial-6.jpg',
+      alt: 'Industrial electrical systems installation at APP Jet Center',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
+    {
+      src: '/gallery/industrial-7.jpg',
+      alt: 'Industrial electrical systems installation at APP Jet Center',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
+    {
+      src: '/gallery/industrial-8.jpg',
+      alt: 'Industrial electrical systems installation at APP Jet Center',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
   ];
 
 // Main Gallery Page Component with added Image Modal
