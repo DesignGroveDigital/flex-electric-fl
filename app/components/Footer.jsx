@@ -37,7 +37,7 @@ const Footer = () => {
                 </div>
               </Link>
               <p className="text-white/70">
-                Professional electrical services for residential and commercial needs. 
+                Professional electrical services for commercial and industrial needs. 
                 Licensed, and insured.
               </p>
               
@@ -60,7 +60,7 @@ const Footer = () => {
                   <h3 className="font-edgar text-white uppercase tracking-wider">Service Areas</h3>
                 </div>
                 <p className="text-white/70">
-                  Brevard, Indian River, Saint Lucie, Martin, Palm Beach, Broward Counties, and Miami-Dade County.
+                  Proudly serving clients nationwide with offices in Florida and New York.
                 </p>
               </div>
             </div>
@@ -103,35 +103,68 @@ const Footer = () => {
               <div>
                 <h3 className="font-edgar text-white uppercase tracking-wider mb-6">Contact Info</h3>
                 <ul className="space-y-4">
-                  <li className="flex items-start gap-3 text-white/70">
-                    <MapPin className="w-5 h-5 mt-1 text-primary" />
-                    <span>
-                    1860 SW Fountainview Blvd, #1008<br />
-                    Port St. Lucie, FL 34986
-                    </span>
+                  {/* Florida Office */}
+                  <li className="pb-4 border-b border-white/10">
+                    <div className="font-edgar text-white/80 text-sm uppercase tracking-wider mb-2">Florida Office</div>
+                    <div className="flex items-start gap-3 text-white/70">
+                      <MapPin className="w-5 h-5 mt-1 text-primary" />
+                      <span>
+                      1860 SW Fountainview Blvd, #1008<br />
+                      Port St. Lucie, FL 34986
+                      </span>
+                    </div>
+                    <div className="mt-2">
+                      <a 
+                        href="tel:+19548689893" 
+                        className="flex items-center gap-3 text-white/70 hover:text-primary transition-colors duration-200"
+                      >
+                        <Phone className="w-5 h-5 text-primary" />
+                        (954) 868-9893
+                      </a>
+                    </div>
                   </li>
-                  <li>
-                    <a 
-                      href="tel:+19548689893" 
-                      className="flex items-center gap-3 text-white/70 hover:text-primary transition-colors duration-200"
-                    >
-                      <Phone className="w-5 h-5 text-primary" />
-                      (954) 868-9893
-                    </a>
+                  
+                  {/* New York Office */}
+                  <li className="pt-2">
+                    <div className="font-edgar text-white/80 text-sm uppercase tracking-wider mb-2">New York Office</div>
+                    <div className="flex items-start gap-3 text-white/70">
+                      <MapPin className="w-5 h-5 mt-1 text-primary" />
+                      <span>
+                      767 Broadway #1413<br />
+                      Manhattan, NY 10003
+                      </span>
+                    </div>
+                    <div className="mt-2">
+                      <a 
+                        href="tel:+15074488868" 
+                        className="flex items-center gap-3 text-white/70 hover:text-primary transition-colors duration-200"
+                      >
+                        <Phone className="w-5 h-5 text-primary" />
+                        (507) 448-8868
+                      </a>
+                    </div>
                   </li>
-                  <li>
-                    <a 
-                      href="mailto:flexelectric.fl@gmail.com"
-                      className="flex items-center gap-3 text-white/70 hover:text-primary transition-colors duration-200"
-                    >
-                      <Mail className="w-5 h-5 text-primary" />
-                      info@flexelectricfl.com
-                    </a>
+                  
+                  {/* Fax & Email - Common for both offices */}
+                  <li className="pt-4 border-t border-white/10">
+                    <div className="flex items-center gap-3 text-white/70">
+                      <span className="text-white/70 font-edgar uppercase tracking-wider">Fax:</span>
+                      (954) 820-6767
+                    </div>
+                    <div className="mt-2">
+                      <a 
+                        href="mailto:info@flexelectricfl.com"
+                        className="flex items-center gap-3 text-white/70 hover:text-primary transition-colors duration-200"
+                      >
+                        <Mail className="w-5 h-5 text-primary" />
+                        info@flexelectricfl.com
+                      </a>
+                    </div>
                   </li>
                 </ul>
               </div>
 
-              {/* Schema.org Structured Data for SEO */}
+              {/* Schema.org Structured Data for SEO - This will need more extensive updates */}
               <script 
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -139,25 +172,40 @@ const Footer = () => {
                     "@context": "https://schema.org",
                     "@type": "ElectricalContractor",
                     "name": "Flex Electric, Inc.",
-                    "url": "https://flexelectric.com",
-                    "logo": "https://flexelectric.com/flexelectric_logo.jpg",
-                    "image": "https://flexelectric.com/hero_image.jpg",
-                    "description": "Professional electrical services for residential and commercial needs in South Florida.",
-                    "address": {
-                      "@type": "PostalAddress",
-                      "streetAddress": "43 South Powerline Rd, #431",
-                      "addressLocality": "Pompano Beach",
-                      "addressRegion": "FL",
-                      "postalCode": "33069",
-                      "addressCountry": "US"
-                    },
-                    "geo": {
-                      "@type": "GeoCoordinates",
-                      "latitude": 26.229398,
-                      "longitude": -80.160755
-                    },
-                    "telephone": "+19548689893",
-                    "email": "flexelectric.fl@gmail.com",
+                    "url": "https://flexelectricfl.com",
+                    "logo": "https://flexelectricfl.com/flexelectric_logo.jpg",
+                    "image": "https://flexelectricfl.com/hero_image.jpg",
+                    "description": "Professional electrical services for commercial and industrial needs nationwide.",
+                    "location": [
+                      {
+                        "@type": "Place",
+                        "name": "Florida Headquarters",
+                        "address": {
+                          "@type": "PostalAddress",
+                          "streetAddress": "1860 SW Fountainview Blvd, #1008",
+                          "addressLocality": "Port St. Lucie",
+                          "addressRegion": "FL",
+                          "postalCode": "34986",
+                          "addressCountry": "US"
+                        },
+                        "telephone": "+19548689893"
+                      },
+                      {
+                        "@type": "Place",
+                        "name": "New York Office",
+                        "address": {
+                          "@type": "PostalAddress",
+                          "streetAddress": "767 Broadway #1413",
+                          "addressLocality": "Manhattan",
+                          "addressRegion": "NY",
+                          "postalCode": "10003",
+                          "addressCountry": "US"
+                        },
+                        "telephone": "+15074488868"
+                      }
+                    ],
+                    "faxNumber": "+19548206767",
+                    "email": "info@flexelectricfl.com",
                     "openingHoursSpecification": [
                       {
                         "@type": "OpeningHoursSpecification",
@@ -166,16 +214,7 @@ const Footer = () => {
                         "closes": "17:00"
                       }
                     ],
-                    "serviceArea": {
-                      "@type": "GeoCircle",
-                      "geoMidpoint": {
-                        "@type": "GeoCoordinates",
-                        "latitude": 26.229398,
-                        "longitude": -80.160755
-                      },
-                      "geoRadius": "80000"
-                    },
-                    "areaServed": ["Palm Beach County", "Broward County", "Brevard County", "Saint Lucie County"],
+                    "areaServed": "United States",
                     "priceRange": "$$",
                     "sameAs": [
                       "https://www.facebook.com/flexelectric",

@@ -362,92 +362,126 @@ const ContactSection = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left Column - Info & Map */}
-          <motion.div 
-            className="space-y-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            {/* Contact Information */}
+        {/* Left Column - Contact Info & Map */}
+        <motion.div 
+          className="space-y-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {/* Contact Information - Both Locations Side by Side */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Florida Office */}
             <div className="space-y-6 text-white">
+              <h3 className="font-edgar uppercase tracking-wider text-white/90 border-b border-white/20 pb-2 mb-2">Florida Office</h3>
               <motion.div 
-                className="flex items-start gap-4"
+                className="flex items-center gap-4"
                 variants={contactItemVariants}
                 custom={0}
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
+                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
                   <MapPin className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
-                <div>
-                  <div className="font-edgar uppercase tracking-wider mb-1">Address</div>
-                  <address className="text-white/80 not-italic">
-                    1860 SW Fountainview Blvd, #1008<br />
-                    Port St. Lucie, FL 34986
-                  </address>
-                </div>
+                <address className="text-white/80 not-italic my-auto">
+                  1860 SW Fountainview Blvd, #1008<br />
+                  Port St. Lucie, FL 34986
+                </address>
               </motion.div>
 
               <motion.div 
-                className="flex items-start gap-4"
+                className="flex items-center gap-4"
                 variants={contactItemVariants}
                 custom={1}
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
+                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
                   <Phone className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
-                <div>
-                  <div className="font-edgar uppercase tracking-wider mb-1">Phone</div>
-                  <a href="tel:+19548689893" className="text-white/80 hover:text-white transition-colors" aria-label="Call us at (954) 868-9893">
-                    (954) 868-9893
-                  </a>
-                </div>
+                <a href="tel:+19548689893" className="text-white/80 hover:text-white transition-colors my-auto" aria-label="Call our Florida office at (954) 868-9893">
+                  (954) 868-9893
+                </a>
               </motion.div>
+            </div>
 
+            {/* New York Office */}
+            <div className="space-y-6 text-white">
+              <h3 className="font-edgar uppercase tracking-wider text-white/90 border-b border-white/20 pb-2 mb-2">New York Office</h3>
               <motion.div 
-                className="flex items-start gap-4"
+                className="flex items-center gap-4"
                 variants={contactItemVariants}
                 custom={2}
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
-                  <Mail className="w-5 h-5 text-white" aria-hidden="true" />
+                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
+                  <MapPin className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
-                <div>
-                  <div className="font-edgar uppercase tracking-wider mb-1">Email</div>
-                  <a href="mailto:info@flexelectricfl.com" className="text-white/80 hover:text-white transition-colors" aria-label="Email us at info@flexelectricfl.com">
-                    info@flexelectricfl.com
-                  </a>
+                <address className="text-white/80 not-italic my-auto">
+                  767 Broadway #1413<br />
+                  Manhattan, NY 10003
+                </address>
+              </motion.div>
+
+              <motion.div 
+                className="flex items-center gap-4"
+                variants={contactItemVariants}
+                custom={3}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
+                  <Phone className="w-5 h-5 text-white" aria-hidden="true" />
                 </div>
+                <a href="tel:+15074488868" className="text-white/80 hover:text-white transition-colors my-auto" aria-label="Call our New York office at (507) 448-8868">
+                  (507) 448-8868
+                </a>
               </motion.div>
             </div>
-
-            {/* Google Map */}
-            <motion.div 
-              className="h-[300px] sm:h-[350px] md:h-[250px] lg:h-[300px] relative overflow-hidden rounded-sm"
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.3 }}
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3534.1071143457787!2d-80.39983978491936!3d27.650193982806277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88deeb0ee7d1ded3%3A0x8fc38a3f20345e3b!2s1860%20SW%20Fountainview%20Blvd%2C%20Port%20St.%20Lucie%2C%20FL%2034986!5e0!3m2!1sen!2sus!4v1656946565425!5m2!1sen!2sus" 
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className=" transition-all duration-500 contrast-125"
-                title="Flex Electric location map"
-                aria-label="Google Maps showing our location"
-              ></iframe>
-            </motion.div>
+          </div>
+          
+          {/* Email - Common for both offices */}
+          <motion.div 
+            className="flex items-center gap-4"
+            variants={contactItemVariants}
+            custom={4}
+            whileHover={{ x: 5 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="w-10 h-10 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-sm">
+              <Mail className="w-5 h-5 text-white" aria-hidden="true" />
+            </div>
+            <div>
+              <div className="font-edgar text-white/90 uppercase tracking-wider mb-1">Email</div>
+              <a href="mailto:info@flexelectricfl.com" className="text-white/80 hover:text-white transition-colors" aria-label="Email us at info@flexelectricfl.com">
+                info@flexelectricfl.com
+              </a>
+            </div>
           </motion.div>
+
+          {/* Google Map - Florida office for now */}
+          <motion.div 
+            className="h-[300px] sm:h-[350px] md:h-[250px] lg:h-[300px] relative overflow-hidden rounded-sm mt-8"
+            variants={itemVariants}
+            whileHover={{ y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3534.1071143457787!2d-80.39983978491936!3d27.650193982806277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88deeb0ee7d1ded3%3A0x8fc38a3f20345e3b!2s1860%20SW%20Fountainview%20Blvd%2C%20Port%20St.%20Lucie%2C%20FL%2034986!5e0!3m2!1sen!2sus!4v1656946565425!5m2!1sen!2sus" 
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="transition-all duration-500 contrast-125"
+              title="Flex Electric Florida location map"
+              aria-label="Google Maps showing our Florida location"
+            ></iframe>
+          </motion.div>
+        </motion.div>
 
           {/* Right Column - Form */}
           <motion.div 
