@@ -122,7 +122,7 @@ const galleryImages = [
     {
       src: '/gallery/panel-1.jpg',
       alt: 'Professional electrical panel installation',
-      category: 'infrastructure',
+      category: 'commercial',
       title: 'Electrical Panel Installation'
     },
     {
@@ -152,13 +152,13 @@ const galleryImages = [
     {
       src: '/gallery/SFC Meter Rm.-1.jpg',
       alt: 'Specialized electrical meter room installation',
-      category: 'infrastructure',
+      category: 'commercial',
       title: 'Meter Room Installation'
     },
     {
       src: '/gallery/SFC METER RM.jpg',
       alt: 'Complete meter room setup',
-      category: 'infrastructure',
+      category: 'commercial',
       title: 'Complete Meter Room'
     },
     {
@@ -212,7 +212,7 @@ const galleryImages = [
     {
       src: '/gallery/meter-4.jpg',
       alt: 'Electrical meter installation',
-      category: 'infrastructure',
+      category: 'commercial',
       title: 'Meter Installation'
     },
     {
@@ -269,6 +269,55 @@ const galleryImages = [
       category: 'infrastructure',
       title: 'Flex Electric Team at Work'
     },
+    {
+      src: '/gallery/industrial-4.jpg',
+      alt: 'APP Jet Center electrical installation',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
+    {
+      src: '/gallery/industrial-5.jpg',
+      alt: 'APP Jet Center electrical installation',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
+    {
+      src: '/gallery/industrial-6.jpg',
+      alt: 'APP Jet Center electrical installation',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
+    {
+      src: '/gallery/industrial-7.jpg',
+      alt: 'APP Jet Center electrical installation',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
+    {
+      src: '/gallery/industrial-8.jpg',
+      alt: 'APP Jet Center electrical installation',
+      category: 'industrial',
+      title: 'APP Jet Center'
+    },
+    {
+      src: '/gallery/infrastructure-14.jpg',
+      alt: 'Electrical conduit installed underground',
+      category: 'infrastructure',
+      title: 'Underground Electrical Conduit'
+    },
+    {
+      src: '/gallery/fountain-business-center-1.jpg',
+      alt: 'Fountain Business Center electrical project',
+      category: 'commercial',
+      title: 'Fountain Business Center'
+    },
+    {
+      src: '/gallery/fountain-business-center-2.jpg',
+      alt: 'Fountain Business Center electrical project',
+      category: 'commercial',
+      title: 'Fountain Business Center'
+    },
+
   ];
 
 // Main Gallery Page Component with added Image Modal
