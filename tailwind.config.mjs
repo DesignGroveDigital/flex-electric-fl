@@ -8,9 +8,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#009C1D",
-        accent: "#E25100",
-        dark: "#363435",
+        primary: "#009D16",
+        accent: "#E35100",
+        secondary: '#5100E3',
+        dark: "#353334",
       },
       fontFamily: {
         xoireqe: ['var(--font-xoireqe)'],

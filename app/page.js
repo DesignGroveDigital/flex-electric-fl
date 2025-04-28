@@ -7,15 +7,12 @@ import WhyUsSection from "./components/WhyUs";
 import GallerySection from "./components/Gallery";
 import TestimonialsSection from "./components/Testimonials";
 import ContactSection from "./components/Contact";
-import ServiceAreaSection from "./components/v2/Servicing";
 
 export default function Home() {
   return (
-    <div className="bg-white text-black mt-16">
+    <div className="bg-white text-black overflow-x-hidden">
       <HeroSection />
-      <FeaturesStrip />
       <ServicesSection />
-      <ServiceAreaSection />
       <AboutSection />
       <WhyUsSection />
       <GallerySection />

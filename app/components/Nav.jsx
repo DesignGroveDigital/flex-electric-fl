@@ -13,6 +13,7 @@ const Navbar = () => {
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
     { href: '/gallery', label: 'Gallery' },
+    { href: '/partners', label: 'Partners' },
     { href: '/contact', label: 'Contact' },
   ];
 
@@ -20,62 +21,67 @@ const Navbar = () => {
     <nav className="w-full bg-white fixed top-0 z-50">
       <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-dark/10 to-transparent" />
       
-      <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24 lg:h-28">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <div className="relative h-20 w-48 sm:h-20 sm:w-44 lg:h-24 lg:w-48">
-              <Image
-                src="/flexelectric_logo.jpg"
-                alt="FlexElectric Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </Link>
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center h-20 lg:h-24">
+          {/* Logo - Left Aligned */}
+          <div className="flex-shrink-0 mr-4">
+            <Link href="/" className="flex items-center">
+              <div className="relative h-20 w-48 sm:h-20 sm:w-44 lg:h-24 lg:w-48">
+                <Image
+                  src="/FE_logo_color_wide_outline.svg"
+                  alt="FlexElectric Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </Link>
+          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
-            {/* Navigation Links */}
+          {/* Centered Navigation */}
+          <div className="hidden lg:flex flex-grow justify-center">
             <div className="flex items-center">
-              {navLinks.map(({ href, label }, index) => (
+              {navLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
-                  className="group relative px-4 xl:px-6 py-8 font-edgar text-xs text-dark/80 hover:text-primary 
+                  className="group relative px-4 xl:px-6 py-8 font-edgar text-xs text-dark hover:text-primary 
                            transition-colors duration-200 uppercase tracking-wider whitespace-nowrap"
                 >
                   {label}
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-primary transform scale-x-0 
-                                group-hover:scale-x-100 transition-transform origin-left" />
+                  <div className="absolute bottom-0 left-1/2 w-6 h-1 bg-primary transform -translate-x-1/2 scale-x-0 
+                                group-hover:scale-x-100 transition-transform origin-center" />
                 </Link>
               ))}
             </div>
+          </div>
 
-            {/* Phone Button */}
+          {/* Phone Button - Right Aligned */}
+          <div className="hidden lg:flex flex-shrink-0 ml-4 skew-x-[-20deg]">
             <a
               href="tel:+19548689893"
               className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 xl:px-6 py-3
                        font-bold uppercase tracking-wider text-md whitespace-nowrap transition-colors"
             >
-              <Phone className="w-4 h-4" />
-              (954) 868-9893
+              <Phone className="w-4 h-4 skew-x-[20deg]" />
+              <span className='skew-x-[20deg]'>(954) 868-9893</span>
             </a>
           </div>
 
           {/* Mobile/Tablet Menu Button */}
-          <button
-            className="lg:hidden text-dark hover:text-primary transition-colors p-2"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
+          <div className="lg:hidden ml-auto">
+            <button
+              className="text-dark hover:text-primary transition-colors p-2"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+            >
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 

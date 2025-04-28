@@ -58,3 +58,25 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* ParallelogramButton.module.css */
+.parallelogramButton {
+  background-color: #009C1D; /* Green */
+  border: none;
+  color: white;
+  padding: 2px 4px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transform: skewX(-20deg); /* Skew the button to create the parallelogram shape */
+  cursor: pointer;
+}
+
+.parallelogramButton > * {
+    transform: skewX(20deg); /* Counter-skew the content to keep it straight */
+}
+
+.parallelogramButton:hover {
+  background-color: #367c39;
+}

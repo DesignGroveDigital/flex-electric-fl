@@ -106,11 +106,6 @@ const TestimonialsSection = () => {
       ref={sectionRef}
       className="w-full bg-gray-100 py-16 sm:py-20 md:py-24 relative overflow-hidden"
     >
-      {/* Decorative Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-72 sm:w-96 h-72 sm:h-96 transform rotate-45 bg-gradient-to-br from-primary/5 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-72 sm:w-96 h-72 sm:h-96 transform -rotate-45 bg-gradient-to-tl from-accent/5 to-transparent" />
-      </div>
 
       <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
@@ -120,15 +115,13 @@ const TestimonialsSection = () => {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          <h2 className="text-dark font-xoireqe text-3xl sm:text-4xl md:text-5xl uppercase mb-6 md:mb-8">
-            Hear From Our Clients
+          <h2 className="text-dark font-xoireqe text-2xl sm:text-3xl md:text-4xl uppercase mb-6 md:mb-8">
+            Hear From <span className='text-accent'>Our</span> Clients
           </h2>
-          <motion.div 
-            className="h-1 w-24 bg-primary mx-auto"
-            initial={{ width: 0, opacity: 0 }}
-            animate={isInView ? { width: "6rem", opacity: 1 } : { width: 0, opacity: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          ></motion.div>
+
+          <p className="text-dark/70 max-w-2xl mx-auto leading-relaxed text-lg">
+            See what our valued clients have to say about our electrical expertise and professional service.
+          </p>
         </motion.div>
 
         {/* Testimonial Carousel */}
@@ -142,7 +135,7 @@ const TestimonialsSection = () => {
             {/* Navigation Buttons - Desktop */}
             <motion.button 
               onClick={previousTestimonial}
-              className="hidden md:block absolute -left-16 top-1/2 -translate-y-1/2 p-2 text-dark/60 hover:text-primary transition-colors"
+              className="hidden md:block absolute -left-16 top-1/2 -translate-y-1/2 p-2 text-dark/60 hover:text-accent transition-colors"
               aria-label="Previous testimonial"
               whileHover={{ x: -3, scale: 1.1 }}
               transition={{ duration: 0.2 }}
@@ -152,7 +145,7 @@ const TestimonialsSection = () => {
 
             <motion.button 
               onClick={nextTestimonial}
-              className="hidden md:block absolute -right-16 top-1/2 -translate-y-1/2 p-2 text-dark/60 hover:text-primary transition-colors"
+              className="hidden md:block absolute -right-16 top-1/2 -translate-y-1/2 p-2 text-dark/60 hover:text-accent transition-colors"
               aria-label="Next testimonial"
               whileHover={{ x: 3, scale: 1.1 }}
               transition={{ duration: 0.2 }}
@@ -169,7 +162,7 @@ const TestimonialsSection = () => {
                 animate={{ rotate: 45 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
               >
-                <div className="bg-primary p-3 md:p-4">
+                <div className="bg-accent p-3 md:p-4">
                   <Quote className="w-4 h-4 md:w-6 md:h-6 text-white transform -rotate-45" />
                 </div>
               </motion.div>
@@ -194,8 +187,8 @@ const TestimonialsSection = () => {
                   <div className="pt-6 border-t border-dark/10">
                     <div className="flex items-start gap-4">
                       {/* User Icon */}
-                      <div className="p-3 bg-primary/10 rounded-full mt-1">
-                        <User className="w-full h-full text-primary" />
+                      <div className="p-3 bg-accent/10 rounded-full mt-1">
+                        <User className="w-full h-full text-accent" />
                       </div>
                       
                       <div>
@@ -204,7 +197,7 @@ const TestimonialsSection = () => {
                         </div>
                         <div className="text-dark/60 space-y-1 mt-1">
                           <div>{testimonials[currentIndex].role}</div>
-                          <div className="font-medium text-primary rotate">{testimonials[currentIndex].company}</div>
+                          <div className="font-medium text-accent rotate">{testimonials[currentIndex].company}</div>
                         </div>
                       </div>
                     </div>
@@ -217,7 +210,7 @@ const TestimonialsSection = () => {
             <div className="flex justify-between mt-6 md:hidden">
               <motion.button 
                 onClick={previousTestimonial}
-                className="p-2 bg-white/80 rounded-full shadow-sm text-dark/60 hover:text-primary transition-colors"
+                className="p-2 bg-white/80 rounded-full shadow-sm text-dark/60 hover:text-accent transition-colors"
                 aria-label="Previous testimonial"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -227,7 +220,7 @@ const TestimonialsSection = () => {
               
               <motion.button 
                 onClick={nextTestimonial}
-                className="p-2 bg-white/80 rounded-full shadow-sm text-dark/60 hover:text-primary transition-colors"
+                className="p-2 bg-white/80 rounded-full shadow-sm text-dark/60 hover:text-accent transition-colors"
                 aria-label="Next testimonial"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -243,8 +236,8 @@ const TestimonialsSection = () => {
               <motion.button
                 key={index}
                 onClick={() => goToTestimonial(index)}
-                className={`w-2 h-2 md:w-3 md:h-3 transform rotate-45 transition-colors
-                          ${index === currentIndex ? 'bg-primary' : 'bg-dark/20 hover:bg-dark/30'}`}
+                className={`w-2 h-2 md:w-3 md:h-3 rounded-sm transform rotate-45 transition-colors
+                          ${index === currentIndex ? 'bg-accent' : 'bg-dark/20 hover:bg-dark/30'}`}
                 aria-label={`Go to testimonial ${index + 1}`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}

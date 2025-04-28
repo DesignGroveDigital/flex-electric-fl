@@ -92,27 +92,19 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="w-full min-h-[84vh] flex items-center relative md:pt-20 pt-4 overflow-hidden">
+    <section className="w-full min-h-[84vh] flex items-center relative md:pt-20 pt-16 overflow-hidden">
       {/* Background Image with Enhanced Parallax Effect */}
       <div 
         className="absolute inset-0 z-0"
       >
         <Image
-          src="/hero_image.jpg"
+          src="/pexels-pixabay-236089.jpg"
           alt="Electrical work background"
           fill
-          className="object-cover scale-[1.05] animate-subtle-zoom"
+          className="object-cover scale-[1.05] grayscale"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-dark/95 via-dark/90 to-dark/85" />
-      </div>
-
-      {/* Animated Decorative Elements */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
-        {/* Circuit-like lines */}
-        <div className="absolute top-[20%] right-[10%] w-24 h-24 border-t-2 border-r-2 border-primary/30 rounded-tr-3xl" />
-        <div className="absolute bottom-[30%] left-[15%] w-32 h-32 border-b-2 border-l-2 border-accent/30 rounded-bl-3xl" />
-        
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2b2b2b] via-[#2b2b2b]/95 to-[#2b2b2b]/90" />
       </div>
 
       {/* Content Container */}
@@ -148,11 +140,8 @@ const HeroSection = () => {
               animate="visible"
               variants={taglineVariants}
             >
-              <p className="text-lg sm:text-xl text-white/90">Licensed Electrical Contractors</p>
               <div className="flex justify-center items-center space-x-2">
-                <div className="w-8 h-[1px] bg-accent"></div>
-                <p className="text-lg sm:text-xl text-accent">Serving South Florida</p>
-                <div className="w-8 h-[1px] bg-accent"></div>
+                <div className="w-32 h-1 bg-accent"></div>
               </div>
             </motion.div>
           </div>
@@ -165,19 +154,20 @@ const HeroSection = () => {
             variants={contentVariants}
           >
             <p className="text-base sm:text-lg md:text-xl leading-relaxed px-2">
-              Flex Electric, Inc. provides comprehensive electrical services for residential and commercial properties throughout South Florida.
+              Flex Electric, Inc. provides comprehensive electrical solutions for commercial properties and industrial facilities across the United States.
             </p>
-            <p className="text-sm sm:text-base md:text-lg leading-relaxed px-2">
-              With over 30 years of combined experience, our licensed professionals deliver reliable, code-compliant solutions tailored to your needs. Experience the peace of mind that comes with South Florida's trusted electrical contractor.
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed px-2 text-white/90">
+              With over 30 years of combined experience, our licensed professionals deliver reliable, code-compliant electrical systems tailored to your enterprise operations. Experience the confidence that comes with America's trusted industrial electrical contractor.
             </p>
           </motion.div>
           
         </div>
       </div>
 
-      {/* Enhanced Overlay Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent z-[2]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-dark/30 to-transparent z-[2]" />
+            {/* Simple, clean accent at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-1">
+        <div className="h-full w-full bg-[#E25100] float-left"></div>
+      </div>
     </section>
   );
 };

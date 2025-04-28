@@ -2,9 +2,10 @@
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import PageBannerAngled from '../components/Banner';
 import { motion, useInView } from 'framer-motion';
-import { ShieldCheck, Clock, Users, Lightbulb, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Clock, Users, Lightbulb, ArrowRight, CheckCircle, Award, Target } from 'lucide-react';
 
 export default function AboutPage() {
   const missionRef = useRef(null);
@@ -15,57 +16,51 @@ export default function AboutPage() {
   
   const valuesRef = useRef(null);
   const isValuesInView = useInView(valuesRef, { once: true });
-  
+
   return (
     <main className="bg-white">
       <PageBannerAngled 
         title="About Us" 
-        subtitle="Family-owned electrical experts serving South Florida for over 30 years"
+        subtitle="Premier electrical solutions for commercial and industrial clients nationwide"
         backgroundImage="/about-banner.jpg"
       />
       
       {/* Company Introduction */}
       <section className="relative py-16 md:py-24 overflow-hidden">
-        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <motion.h2 
-                className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6"
+                className="text-3xl md:text-4xl text-dark mb-6 font-xoireqe uppercase tracking-wide"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                Expert Electricians You Can Trust
+                Powering <span className='text-accent'>America's</span> Business
               </motion.h2>
-              <motion.div 
-                className="h-1 w-0 bg-primary mb-8"
-                initial={{ width: 0 }}
-                animate={{ width: "6rem" }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              />
               <motion.p 
-                className="text-lg text-gray-700 mb-6"
+                className="text-dark/80 mb-6 leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                Flex Electric, Inc. is a family-owned and operated electrical company, fully licensed and insured, with over 30 years of combined knowledge and experience providing full electrical service throughout South Florida.
+                Flex Electric, Inc. is one of the nation's leading providers for design, installation and maintenance of electrical systems, structured cabling applications, fiber optic cables, integrated electronic structures and building solutions, street lights and EV charger structures.
               </motion.p>
               <motion.p 
-                className="text-lg text-gray-700 mb-6"
+                className="text-dark/80 mb-6 leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                Based in Pompano Beach, Florida, we've built our reputation on delivering exceptional electrical services for both residential and commercial projects. Our team of highly-trained electricians approaches each job with the same level of dedication and professionalism, whether it's a small home repair or a large-scale commercial installation.
+                Headquartered in Port St. Lucie, Florida with offices located in New York, we service a diverse customer base across all 50 states. Our team of licensed professionals delivers comprehensive electrical solutions tailored to the unique needs of commercial and industrial enterprises nationwide.
               </motion.p>
               <motion.p 
-                className="text-lg text-gray-700"
+                className="text-dark/80 leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                At Flex Electric, our goal is to create long-term relationships with our clients through quality workmanship, transparent communication, and reliable service. We take great pride in our ability to solve complex electrical challenges while maintaining the highest standards of safety and customer satisfaction.
+                We are committed to building better solutions for our customers in both private and public sectors. Our goal is to create long-term relationships through quality workmanship, transparent communication, and reliable service. We take great pride in our ability to solve complex electrical challenges while maintaining the highest standards of safety and customer satisfaction.
               </motion.p>
             </div>
             
@@ -75,17 +70,21 @@ export default function AboutPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <div className="relative z-10">
+              <div className="relative h-[500px] overflow-hidden rounded-lg shadow-xl">
                 <Image 
-                  src="/gallery/infrastructure-2.jpg" 
-                  alt="Flex Electric professional electrician" 
-                  width={600} 
-                  height={600}
-                  className="rounded-sm shadow-lg"
+                  src="/gallery/infrastructure-13-1.jpg" 
+                  alt="Flex Electric professional electrical installation" 
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                  className="object-cover"
                 />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b]/30 to-transparent"></div>
               </div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/10 rounded-sm"></div>
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-accent/10 rounded-sm"></div>
+              
+              {/* Decorative border */}
+              <div className="absolute -bottom-3 -right-3 w-2/3 h-1/2 border-4 border-accent rounded-lg -z-10"></div>
             </motion.div>
           </div>
         </div>
@@ -94,35 +93,64 @@ export default function AboutPage() {
       {/* Mission Section */}
       <section 
         ref={missionRef}
-        className="py-16 bg-gray-100 overflow-hidden"
+        className="py-16 md:py-24 bg-gray-100 overflow-hidden"
       >
-        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={isMissionInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6">
-              Our Mission
+            <h2 className="text-3xl md:text-4xl text-dark mb-4 font-xoireqe uppercase tracking-wide">
+              Our <span className="text-accent">Mission</span>
             </h2>
-            <div className="h-1 w-24 bg-primary mx-auto mb-8"></div>
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-              "To provide reliable, high-quality electrical services that ensure the safety and satisfaction of our clients, while maintaining the highest standards of professionalism and integrity in everything we do."
+            <p className="text-base text-dark/80 mb-12 leading-relaxed">
+              "To provide reliable, high-quality electrical solutions that ensure the safety and satisfaction of our commercial and industrial clients, while maintaining the highest standards of professionalism and integrity in everything we do."
             </p>
-            <div className="flex flex-wrap justify-center gap-6 mt-12">
-              <div className="flex items-center bg-white p-4 rounded-sm shadow-sm">
-                <ShieldCheck className="w-8 h-8 text-primary mr-4" />
-                <span className="text-dark font-edgar">Licensed & Insured</span>
-              </div>
-              <div className="flex items-center bg-white p-4 rounded-sm shadow-sm">
-                <Clock className="w-8 h-8 text-primary mr-4" />
-                <span className="text-dark font-edgar">Prompt Service</span>
-              </div>
-              <div className="flex items-center bg-white p-4 rounded-sm shadow-sm">
-                <Users className="w-8 h-8 text-primary mr-4" />
-                <span className="text-dark font-edgar">Experienced Team</span>
-              </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12">
+              <motion.div 
+                className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isMissionInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="bg-accent/10 p-4 rounded-full mb-4">
+                  <ShieldCheck className="w-10 h-10 text-accent" />
+                </div>
+                <h3 className="text-lg font-edgar text-dark uppercase tracking-wider mb-2">Licensed & Insured</h3>
+                <p className="text-dark/70 text-center text-base">Fully certified professionals delivering compliant electrical installations nationwide</p>
+              </motion.div>
+              
+              <motion.div 
+                className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isMissionInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="bg-accent/10 p-4 rounded-full mb-4">
+                  <Clock className="w-10 h-10 text-accent" />
+                </div>
+                <h3 className="text-lg font-edgar text-dark uppercase tracking-wider mb-2">24/7 Response</h3>
+                <p className="text-dark/70 text-center text-base">Emergency services available around the clock to minimize business disruption</p>
+              </motion.div>
+              
+              <motion.div 
+                className="flex flex-col items-center p-6 bg-white rounded-lg shadow-md"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isMissionInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="bg-accent/10 p-4 rounded-full mb-4">
+                  <Users className="w-10 h-10 text-accent" />
+                </div>
+                <h3 className="text-lg font-edgar text-dark uppercase tracking-wider mb-2">Nationwide Service</h3>
+                <p className="text-dark/70 text-center text-base">Serving clients across all 50 states with consistent quality and expertise</p>
+              </motion.div>
             </div>
           </motion.div>
         </div>
@@ -131,77 +159,113 @@ export default function AboutPage() {
       {/* Why Choose Us Section */}
       <section 
         ref={whyChooseRef}
-        className="py-16 md:py-24 relative overflow-hidden"
+        className="py-16 md:py-24 bg-[#2b2b2b] relative overflow-hidden"
       >
-        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={isWhyChooseInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6">
-              Why Choose Us?
+            <h2 className="text-3xl md:text-4xl text-white mb-4 font-xoireqe uppercase tracking-wide">
+              Why Choose <span className="text-accent">Flex</span> Electric
             </h2>
-            <div className="h-1 w-24 bg-primary mx-auto mb-8"></div>
+            <p className="text-white/80 max-w-2xl mx-auto text-lg">
+              Our commitment to excellence sets us apart in the electrical industry
+            </p>
           </motion.div>
           
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-12 gap-12 items-center">
             <motion.div 
-              className="relative order-2 md:order-1"
+              className="md:col-span-5 relative order-2 md:order-1"
               initial={{ opacity: 0, x: -30 }}
               animate={isWhyChooseInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="relative z-10">
+              <div className="relative h-[400px] overflow-hidden rounded-lg shadow-xl">
                 <Image 
                   src="/gallery/APOK-6.png" 
                   alt="Professional electrical installation by Flex Electric" 
-                  width={600} 
-                  height={400}
-                  className="rounded-sm shadow-lg"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
                 />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b]/50 to-transparent"></div>
               </div>
-              <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-primary/10 rounded-sm"></div>
+              
+              {/* Decorative border */}
+              <div className="absolute -bottom-3 -left-3 w-2/3 h-1/2 border-4 border-accent rounded-lg -z-10"></div>
             </motion.div>
             
             <motion.div 
-              className="order-1 md:order-2"
+              className="md:col-span-7 order-1 md:order-2"
               initial={{ opacity: 0, x: 30 }}
               animate={isWhyChooseInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="space-y-6">
-                <p className="text-lg text-gray-700">
-                  Our professionally trained team is reliable, courteous, and trustworthy. You won't have to worry about unsafe workmanship. We take pride in the quality of our work by ensuring that all work is completed to your satisfaction in a convenient and timely way.
+                <p className="text-white/80 leading-relaxed">
+                  Our professionally trained team is reliable, courteous, and trustworthy. You won't have to worry about unsafe workmanship. We take pride in the quality of our work by ensuring that all projects are completed to your satisfaction in a convenient and timely manner.
                 </p>
                 
-                <p className="text-lg text-gray-700">
-                  Our priority is to provide you with the highest quality of work affordable to your budget. You can put your mind at ease knowing we are available in cases of emergency.
+                <p className="text-white/80 leading-relaxed">
+                  As specialists in commercial and industrial electrical systems, we bring expertise to complex projects including structured cabling, fiber optic installations, and integrated electronic systems. Our priority is to provide you with the highest quality solutions affordable to your budget.
                 </p>
                 
-                <p className="text-lg text-gray-700">
-                  At Flex Electric, Inc., our goal is to create a long-term relationship based on trust with our clients. We strive to become the preferred electrical service provider of homes and businesses in our community and the surrounding area.
+                <p className="text-white/80 leading-relaxed">
+                  We serve diverse facilities including hospitals, educational institutions, data centers, office buildings, and aviation facilities. With dedicated teams in both Florida and New York, we're positioned to support clients throughout the United States.
                 </p>
                 
-                <div className="pt-4">
-                  <div className="flex items-start mb-4">
-                    <div className="text-primary mr-4 mt-1">
-                      <ShieldCheck className="w-6 h-6" />
-                    </div>
-                    <p className="text-gray-700">
-                      Fully licensed and insured electrical contractors providing trustworthy service.
+                <div className="pt-4 space-y-4">
+                  <motion.div 
+                    className="flex items-start"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={isWhyChooseInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                  >
+                    <CheckCircle className="w-6 h-6 text-accent mr-4 mt-1 flex-shrink-0" />
+                    <p className="text-white/80">
+                      Comprehensive electrical design, installation, and maintenance for commercial and industrial properties.
                     </p>
-                  </div>
+                  </motion.div>
                   
-                  <div className="flex items-start">
-                    <div className="text-primary mr-4 mt-1">
-                      <Clock className="w-6 h-6" />
-                    </div>
-                    <p className="text-gray-700">
-                      Reliable, on-time service that respects your schedule and needs.
+                  <motion.div 
+                    className="flex items-start"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={isWhyChooseInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.7 }}
+                  >
+                    <CheckCircle className="w-6 h-6 text-accent mr-4 mt-1 flex-shrink-0" />
+                    <p className="text-white/80">
+                      Specialized expertise in structured cabling, fiber optics, and integrated systems.
                     </p>
-                  </div>
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="flex items-start"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={isWhyChooseInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.8 }}
+                  >
+                    <CheckCircle className="w-6 h-6 text-accent mr-4 mt-1 flex-shrink-0" />
+                    <p className="text-white/80">
+                      Nationwide service capabilities with offices in Florida and New York.
+                    </p>
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="flex items-start"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={isWhyChooseInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.9 }}
+                  >
+                    <CheckCircle className="w-6 h-6 text-accent mr-4 mt-1 flex-shrink-0" />
+                    <p className="text-white/80">
+                      24/7 emergency response for disaster recovery and system repairs.
+                    </p>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
@@ -212,103 +276,117 @@ export default function AboutPage() {
       {/* Values Section */}
       <section 
         ref={valuesRef}
-        className="py-16 bg-gray-100 relative overflow-hidden"
+        className="py-16 md:py-24 bg-white relative overflow-hidden"
       >
-        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={isValuesInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6">
-              Our Values
+            <h2 className="text-3xl md:text-4xl text-dark mb-4 font-xoireqe uppercase tracking-wide">
+              Our <span className="text-accent">Values</span>
             </h2>
-            <div className="h-1 w-24 bg-primary mx-auto mb-8"></div>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+            <p className="text-dark/80 max-w-2xl mx-auto">
               The principles that guide us in providing exceptional electrical services
             </p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div 
-              className="bg-white p-8 rounded-sm shadow-sm"
+              className="bg-gray-100 p-8 rounded-lg shadow-md overflow-hidden relative"
               initial={{ opacity: 0, y: 20 }}
               animate={isValuesInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.3 }}
+              whileHover={{ y: -5 }}
             >
-              <h3 className="text-2xl font-edgar text-dark mb-4">Quality</h3>
-              <p className="text-gray-700">
-                We never compromise on the quality of our work. From the materials we use to the techniques we employ, excellence is our standard. Our priority is to provide you with the highest quality of work affordable to your budget.
+              <div className="absolute top-0 left-0 w-2 h-full bg-accent"></div>
+              <div className="flex items-center mb-4">
+                <Award className="w-8 h-8 text-accent mr-4" />
+                <h3 className="text-xl font-edgar text-dark uppercase tracking-wider">Quality</h3>
+              </div>
+              <p className="text-dark/80">
+                We never compromise on the quality of our work. From the materials we use to the techniques we employ, excellence is our standard. Our priority is to provide you with the highest quality solutions that meet enterprise-scale requirements while remaining affordable for your budget.
               </p>
             </motion.div>
             
             <motion.div 
-              className="bg-white p-8 rounded-sm shadow-sm"
+              className="bg-gray-100 p-8 rounded-lg shadow-md overflow-hidden relative"
               initial={{ opacity: 0, y: 20 }}
               animate={isValuesInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.4 }}
+              whileHover={{ y: -5 }}
             >
-              <h3 className="text-2xl font-edgar text-dark mb-4">Integrity</h3>
-              <p className="text-gray-700">
-                Honesty and transparency are at the core of our business. We provide straightforward advice, fair pricing, and always act in the best interest of our clients. We stand behind every job we complete.
+              <div className="absolute top-0 left-0 w-2 h-full bg-accent"></div>
+              <div className="flex items-center mb-4">
+                <ShieldCheck className="w-8 h-8 text-accent mr-4" />
+                <h3 className="text-xl font-edgar text-dark uppercase tracking-wider">Integrity</h3>
+              </div>
+              <p className="text-dark/80">
+                Honesty and transparency are at the core of our business. We provide straightforward advice, fair pricing, and always act in the best interest of our clients. We stand behind every installation, maintaining rigorous compliance with industry standards and regulations nationwide.
               </p>
             </motion.div>
             
             <motion.div 
-              className="bg-white p-8 rounded-sm shadow-sm"
+              className="bg-gray-100 p-8 rounded-lg shadow-md overflow-hidden relative"
               initial={{ opacity: 0, y: 20 }}
               animate={isValuesInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.5 }}
+              whileHover={{ y: -5 }}
             >
-              <h3 className="text-2xl font-edgar text-dark mb-4">Reliability</h3>
-              <p className="text-gray-700">
-                When we make a commitment, we keep it. Our clients can count on us to show up on time, complete projects as scheduled, and be available when emergencies arise. You can put your mind at ease knowing we are available in cases of emergency.
+              <div className="absolute top-0 left-0 w-2 h-full bg-accent"></div>
+              <div className="flex items-center mb-4">
+                <Target className="w-8 h-8 text-accent mr-4" />
+                <h3 className="text-xl font-edgar text-dark uppercase tracking-wider">Reliability</h3>
+              </div>
+              <p className="text-dark/80">
+                When we make a commitment, we keep it. Our commercial and industrial clients can count on us to show up on time, complete projects as scheduled, and be available for 24/7 emergency response. Our national presence ensures we can support your business wherever you operate.
               </p>
             </motion.div>
           </div>
         </div>
       </section>
       
+      
       {/* CTA Section */}
-      <section className="bg-accent py-16 relative overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-64 h-64 transform rotate-45">
-            <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 transform -rotate-12">
-            <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707M12 21v-1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M12 18a6 6 0 100-12 6 6 0 000 12z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
+      <section className="relative w-full overflow-hidden py-16 md:py-24">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/electricity-2403585_19202.jpg"
+            alt="Electrical services background"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-accent/80"></div>
         </div>
         
-        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+        {/* Content Container */}
+        <div className="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-10 text-center md:text-left">
             <div className="max-w-2xl">
-              <div className="flex items-center mb-4">
-                <Lightbulb className="w-8 h-8 text-white mr-4" />
-                <h2 className="text-3xl md:text-4xl font-xoireqe text-white">
-                  Ready for Your Project?
-                </h2>
-              </div>
+              <h2 className="text-white font-xoireqe text-3xl md:text-4xl uppercase mb-4 tracking-wide">
+                Ready for Your Project?
+              </h2>
               <p className="text-white/90 text-lg">
-                Whether you need electrical services for your home or business, our team is ready to bring your project to life with the same quality and expertise showcased in our gallery.
+                Whether you need electrical services for your commercial property or industrial facility, our team is ready to bring your project to life with expert solutions tailored to your specific requirements.
               </p>
             </div>
             
             <div className="flex-shrink-0">
-              <a 
-                href="/contact" 
-                className="bg-dark hover:bg-dark/90 text-white font-edgar uppercase tracking-wider py-4 px-8 inline-flex items-center transition-colors rounded-sm"
-              >
-                <span className="mr-2">Get Your Free Estimate</span>
-                <ArrowRight className="w-5 h-5" />
-              </a>
+              <Link href="/contact">
+                <motion.button
+                  className="bg-white hover:bg-white/90 text-accent py-4 px-8 rounded-lg font-edgar text-lg uppercase tracking-wider transition-colors duration-300 shadow-lg"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="mr-2">Get Your Free Estimate</span>
+                  <ArrowRight className="w-5 h-5 inline ml-2" />
+                </motion.button>
+              </Link>
             </div>
           </div>
         </div>

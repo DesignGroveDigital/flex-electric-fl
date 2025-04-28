@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 const GallerySection = () => {
@@ -18,22 +18,28 @@ const GallerySection = () => {
   // Example gallery items - replace with actual data
   const galleryItems = [
     {
-      id: 6,
-      title: 'Commercial Wiring',
-      category: 'Commercial',
-      imageUrl: '/gallery/commercial-1.jpg',
+      id: 1,
+      title: 'Industrial Power Plant',
+      category: 'Industrial',
+      imageUrl: '/gallery/industrial-3.jpg',
     },
     {
       id: 2,
-      title: 'Commercial Lighting Installation',
+      title: 'Commercial Building',
       category: 'Commercial',
-      imageUrl: '/gallery/ritz-carlton.jpg',
+      imageUrl: '/gallery/palm-beach-university.jpg',
     },
     {
       id: 3,
-      title: 'Panel Upgrade',
-      category: 'Residential',
-      imageUrl: '/gallery/panel-1.jpg',
+      title: 'Underground Electrical Work',
+      category: 'Infrastructure',
+      imageUrl: '/gallery/infrastructure-5.jpg',
+    },
+    {
+      id: 6,
+      title: 'Golden Beach Civic Center',
+      category: 'Commercial',
+      imageUrl: '/gallery/golden-beach-civic-center.jpg',
     },
     {
       id: 4,
@@ -43,16 +49,11 @@ const GallerySection = () => {
     },
     {
       id: 5,
-      title: 'Town Home Interior',
+      title: 'TGB Civic Center',
       category: 'Commercial',
-      imageUrl: '/gallery/apoc-town-homes.jpg',
+      imageUrl: '/gallery/TGB civic-center.jpg',
     },
-    {
-      id: 1,
-      title: 'Golden Beach Civic Center',
-      category: 'Commercial',
-      imageUrl: '/gallery/golden-beach-civic-center.jpg',
-    },
+
   ];
 
   // Animation variants
@@ -156,33 +157,21 @@ const GallerySection = () => {
         ref={sectionRef}
         className="w-full bg-white py-24 relative overflow-hidden"
       >
-        {/* Decorative Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-96 h-96 transform rotate-45 bg-gradient-to-br from-primary/5 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 transform -rotate-45 bg-gradient-to-tl from-accent/5 to-transparent" />
-        </div>
 
         <motion.div 
-          className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative"
+          className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
           {/* Section Header */}
           <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-dark font-xoireqe text-5xl uppercase mb-8">
-              Our Work
-            </h2>
-            <motion.div 
-              className="h-1 w-24 bg-primary mx-auto mb-8"
-              initial={{ width: 0, opacity: 0 }}
-              animate={isInView ? { width: "6rem", opacity: 1 } : { width: 0, opacity: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            ></motion.div>
-
-            <p className="text-dark/80 text-lg max-w-3xl mx-auto leading-relaxed">
-              Browse through our collection of completed projects and see the quality of our work firsthand.
-            </p>
+          <h2 className="text-3xl md:text-4xl text-dark mb-4 font-xoireqe uppercase">
+            Featured <span className="text-accent">Projects</span>
+          </h2>
+          <p className="text-dark/70 max-w-2xl mx-auto leading-relaxed text-lg">
+            Explore our portfolio of electrical solutions for commercial and industrial clients across the United States.
+          </p>
           </motion.div>
 
           {/* Gallery Grid */}
@@ -205,7 +194,7 @@ const GallerySection = () => {
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="relative h-80 w-full overflow-hidden">
+                <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-md">
                   <div className="absolute inset-0 bg-dark/5 transform -rotate-2 group-hover:rotate-0 transition-transform duration-300" />
                   <div className="absolute inset-0 transform group-hover:rotate-0 transition-transform duration-300 overflow-hidden">
                     <Image
@@ -247,15 +236,11 @@ const GallerySection = () => {
             >
               <Link 
                 href="/gallery"
-                className="inline-flex items-center bg-dark hover:bg-dark/90 text-white px-8 py-4
-                        uppercase font-edgar tracking-wider transition-colors duration-300 group"
+                className="inline-flex items-center bg-accent hover:bg-accent/90 text-white py-3 px-8 rounded-lg font-edgar text-sm uppercase tracking-wider transition-colors duration-300 shadow-lg"
+
               >
                 View All Projects
-                <motion.div 
-                  className="ml-3 w-6 h-[2px] bg-white"
-                  whileHover={{ width: "2rem", x: 4 }}
-                  transition={{ duration: 0.3 }}
-                />
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </motion.div>
           </motion.div>

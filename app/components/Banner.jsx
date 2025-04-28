@@ -3,15 +3,24 @@ import Image from 'next/image';
 
 const PageBannerAngled = ({ title, subtitle, backgroundImage = '/banner-bg.jpg' }) => {
   return (
-    <section className="w-full bg-dark relative overflow-hidden pt-24">
+    <section className="w-full bg-dark relative overflow-hidden">
       {/* Background Container with Angle */}
       <div className="h-[350px] md:h-[420px] relative">
-        
+
+        {/*Background image */}
+        <Image
+          src="/pexels-pixabay-236089.jpg"
+          alt="Background Image"
+          fill
+          className="object-cover scale-[1.05] grayscale"
+          priority
+        />
+                
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/90 to-dark/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2b2b2b] to-[#2b2b2b]/90" />
         
         {/* Bottom Angle - Creates the slanted bottom edge */}
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-white transform -skew-y-3 origin-left translate-y-12" />
+        <div className="absolute bottom-0 left-0 w-full h-16 bg-white transform -skew-y-3 origin-left translate-y-12" />
       </div>
 
       {/* Content */}
@@ -31,9 +40,7 @@ const PageBannerAngled = ({ title, subtitle, backgroundImage = '/banner-bg.jpg' 
         </div>
       </div>
       
-      {/* Accent Lightning Bolt Shape */}
-      <div className="absolute right-0 bottom-8 md:bottom-12 w-32 md:w-48 h-32 md:h-48 bg-primary/10 
-                    skew-x-12 -skew-y-12 transform rotate-12 hidden md:block" />
+
     </section>
   );
 };
