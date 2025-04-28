@@ -48,13 +48,13 @@ const galleryImages = [
       title: 'Residential Development'
     },
     {
-      src: '/gallery/APOK-6.png',
+      src: '/gallery/APOK-6.jpg',
       alt: 'Overhead view of apartment complex',
       category: 'multi-family',
       title: 'Apartment Complex'
     },
     {
-      src: '/gallery/APOK TOWN HOMES.png',
+      src: '/gallery/APOK TOWN HOMES.jpg',
       alt: 'Modern townhome development with electrical installations',
       category: 'multi-family',
       title: 'APOK Townhomes'

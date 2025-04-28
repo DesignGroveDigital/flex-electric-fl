@@ -51,7 +51,7 @@ const GallerySection = () => {
       id: 5,
       title: 'TGB Civic Center',
       category: 'Commercial',
-      imageUrl: '/gallery/TGB civic-center.jpg',
+      imageUrl: '/gallery/TGB Civic-Center.jpg',
     },
 
   ];
