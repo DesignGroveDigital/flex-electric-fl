@@ -12,8 +12,9 @@ export default function ContactPage() {
     name: '',
     email: '',
     phone: '',
-    contactTime: '',
-    description: ''
+    description: '',
+    projectType: '',
+    isUrgent: false
   });
   
   // Form submission states
@@ -119,6 +120,8 @@ export default function ContactPage() {
           errorMessage = 'Please provide a brief description';
         }
         break;
+      // No validation for projectType as it's optional
+      // No validation for isUrgent as it's a boolean
       default:
         break;
     }
@@ -131,12 +134,12 @@ export default function ContactPage() {
     return !errorMessage;
   };
   
-  // Validate the entire form
+  // Update validateForm to validate all required fields
   const validateForm = () => {
-    const fieldNames = ['name', 'email', 'phone', 'description'];
+    const fieldNames = ['name', 'email', 'phone', 'description']; // Required fields only
     let formIsValid = true;
     
-    // Mark all fields as touched
+    // Mark all required fields as touched
     const newTouchedFields = {};
     fieldNames.forEach(field => {
       newTouchedFields[field] = true;
@@ -199,39 +202,40 @@ export default function ContactPage() {
     setSubmitError(false);
     
     try {
-        const response = await fetch('/api/send-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-        
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Failed to submit');
-        }
-        
-        setSubmitSuccess(true);
-        // Reset form after successful submission
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          contactTime: '',
-          description: ''
-        });
-        setCharCount(0);
-        
-        // Reset success message after 5 seconds
-        setTimeout(() => {
-          setSubmitSuccess(false);
-        }, 5000);
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        setSubmitError(true);
-      } finally {
-        setIsSubmitting(false);
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to submit');
       }
-    };
+      
+      setSubmitSuccess(true);
+      // Reset form after successful submission
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        description: '',
+        projectType: '',
+        isUrgent: false
+      });
+      setCharCount(0);
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 5000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
     return (
       <main className="bg-white">
@@ -261,7 +265,7 @@ export default function ContactPage() {
               transition={{ duration: 0.4, delay: 0.2 }}
               whileHover={{ y: -5 }}
               onClick={() => {
-                window.open('https://maps.app.goo.gl/QzEqHzc1u1UBQkXq8', '_blank');
+                window.open('https://maps.app.goo.gl/qq8cF49ugZpJDTcs6', '_blank');
               }}
             >
               {/* Accent Border */}
@@ -295,7 +299,7 @@ export default function ContactPage() {
               transition={{ duration: 0.4, delay: 0.3 }}
               whileHover={{ y: -5 }}
               onClick={() => {
-                window.open('https://maps.app.goo.gl/s1Yfr5KoL2Sg4UAU6', '_blank');
+                window.open('https://maps.app.goo.gl/Z8serc7uXcVPAxCo7', '_blank');
               }}
             >
               {/* Accent Border */}

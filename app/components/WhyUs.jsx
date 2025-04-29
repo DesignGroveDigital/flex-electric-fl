@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
+import Link from 'next/link';
 
 const WhyChooseUsSection = () => {
   const benefits = [
@@ -57,16 +58,22 @@ const WhyChooseUsSection = () => {
               ))}
             </ul>
             
-            {/* CTA Button */}
+          {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
               viewport={{ once: true }}
             >
-              <button className="inline-block bg-accent hover:bg-accent/90 text-white py-3 px-8 rounded-lg font-edgar text-sm uppercase tracking-wider transition-colors duration-300 shadow-lg">
-                Partner With Us
-              </button>
+              <Link href="/contact">
+                <motion.button 
+                  className="inline-block bg-accent hover:bg-accent/90 text-white py-3 px-8 rounded-lg font-edgar text-sm uppercase tracking-wider transition-colors duration-300 shadow-lg"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Partner With Us
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
 

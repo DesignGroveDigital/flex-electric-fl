@@ -171,7 +171,7 @@ function IntroductionSection() {
   );
 }
 
-// Enhanced Service Section Component with Service Grid
+// Enhanced Service Section Component with proper text wrapping
 function EnhancedServiceSection({ title, description, imageSrc, imageAlt, imageOnRight, bgColor, services }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, threshold: 0.1 });
@@ -202,51 +202,57 @@ function EnhancedServiceSection({ title, description, imageSrc, imageAlt, imageO
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
-            {/* Optional gradient overlay for better text contrast if needed */}
+            {/* Optional gradient overlay for better text contrast */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b]/40 to-transparent md:bg-gradient-to-r md:from-transparent md:to-transparent"></div>
           </motion.div>
         </div>
           
-        {/* Content Column */}
-        <motion.div 
-          className={`${imageOnRight ? 'order-2 md:order-1' : 'order-2'} py-16 md:py-24 px-4 sm:px-6 lg:px-16 xl:px-24 flex items-center`}
-          initial={{ opacity: 0, x: imageOnRight ? -30 : 30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <div>
-            <h2 className="text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6">
-              {title.split(' ').map((word, i) => 
-                i === 0 ? <span key={i} className="text-accent">{word} </span> : <span key={i}>{word} </span>
-              )}
-            </h2>
-            
-            <p className="text-dark/80 leading-relaxed text-lg mb-10">
-              {description}
-            </p>
-            
-            {/* Services Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-              {services.map((service, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center bg-white/50 p-3 rounded-lg shadow-sm border border-gray-100 hover:shadow-md hover:bg-white transition-all duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.3, delay: 0.5 + (index * 0.05) }}
-                  whileHover={{ y: -3 }}
-                >
-                  <div className="bg-accent/10 p-2 rounded-full mr-3">
-                    <div className="text-accent">
-                      {service.icon}
+        {/* Content Column with proper text wrapping */}
+        <div className={`${imageOnRight ? 'order-2 md:order-1' : 'order-2'}`}>
+          <motion.div 
+            className="py-16 md:py-24 px-4 sm:px-6 lg:px-16 xl:px-24 flex items-center"
+            initial={{ opacity: 0, x: imageOnRight ? -30 : 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <div className="w-full overflow-hidden">
+              {/* Responsive heading with proper wrapping */}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-xoireqe uppercase text-dark mb-6 break-words leading-tight">
+                {title.split(' ').map((word, i) => 
+                  i === 0 ? <span key={i} className="text-accent">{word} </span> : <span key={i}>{word} </span>
+                )}
+              </h2>
+              
+              {/* Description with proper wrapping */}
+              <p className="text-dark/80 leading-relaxed text-base sm:text-lg mb-10 break-words">
+                {description}
+              </p>
+              
+              {/* Services Grid with proper wrapping */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                {services.map((service, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex items-center bg-white/50 p-3 rounded-lg shadow-sm border border-gray-100 hover:shadow-md hover:bg-white transition-all duration-300 overflow-hidden"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.3, delay: 0.5 + (index * 0.05) }}
+                    whileHover={{ y: -3 }}
+                  >
+                    <div className="bg-accent/10 p-2 rounded-full mr-3 flex-shrink-0">
+                      <div className="text-accent">
+                        {service.icon}
+                      </div>
                     </div>
-                  </div>
-                  <span className="text-dark/80 font-medium">{service.name}</span>
-                </motion.div>
-              ))}
+                    <span className="text-dark/80 font-medium break-words">
+                      {service.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

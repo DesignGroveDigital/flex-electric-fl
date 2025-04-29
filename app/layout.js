@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/Nav";
 import FooterDark from "./components/Footer";
 import Script from "next/script";
+import ScrollPaddingFix from "./ScrollPaddingFix";
 
 const xoireqe = localFont({
   src: '../fonts/Xoireqe.ttf',
@@ -15,9 +16,9 @@ const optiEdgar = localFont({
 });
 
 export const metadata = {
-  title: "FlexElectric - Licensed Electrical Contractors South Florida",
-  description: "Trusted electrical contractor serving South Florida with 30+ years of experience. Specializing in commercial and residential electrical services and installations.",
-  keywords: "electrical contractors, South Florida electrician, commercial electrical, residential electrical, Port St. Lucie, electrical services, licensed electrician, electrical panel upgrades",
+  title: "FlexElectric - National Commercial & Industrial Electrical Contractors",
+  description: "Leading electrical contractor with offices in Florida and New York providing professional electrical services nationwide. Specialists in commercial, industrial, and institutional electrical systems, fiber optic cabling, and EV charging infrastructure.",
+  keywords: "electrical contractors, nationwide electrical services, commercial electrical, industrial electrical, fiber optic cabling, EV charging stations, data centers, hospital electrical, institutional electrical, emergency electrical services",
   robots: "index, follow",
   alternates: {
     canonical: "https://flexelectricfl.com",
@@ -35,13 +36,13 @@ export const metadata = {
   },
   metadataBase: new URL('https://flexelectricfl.com'),
   openGraph: {
-    title: "FlexElectric - Licensed Electrical Contractors | South Florida",
-    description: "Professional electrical services for residential and commercial properties with 30+ years of experience. Serving Brevard, Indian River, St. Lucie, Martin, Palm Beach, and Broward counties.",
+    title: "FlexElectric - National Commercial & Industrial Electrical Contractors",
+    description: "Professional commercial and industrial electrical services nationwide. Offices in Florida and New York with expertise in institutional projects, data systems, and EV charging infrastructure.",
     url: "https://flexelectricfl.com",
     siteName: "Flex Electric, Inc.",
     images: [
       {
-        url: "https://flexelectricfl.com/og-image.jpg", // Be sure to create this image
+        url: "https://flexelectricfl.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Flex Electric - Professional Electrical Services",
@@ -52,9 +53,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "FlexElectric - Licensed Electrical Contractors | South Florida",
-    description: "Professional electrical services for residential and commercial properties throughout South Florida.",
-    images: ["https://flexelectricfl.com/og-image.jpg"], // Same as OG image
+    title: "FlexElectric - National Commercial & Industrial Electrical Contractors",
+    description: "Professional commercial and industrial electrical services nationwide with offices in Florida and New York.",
+    images: ["https://flexelectricfl.com/og-image.jpg"],
   },
   viewport: {
     width: "device-width",
@@ -89,22 +90,42 @@ export default function RootLayout({ children }) {
               "name": "Flex Electric, Inc.",
               "image": "https://flexelectricfl.com/logo.jpg",
               "url": "https://flexelectricfl.com",
-              "telephone": "+19548689893",
+              "telephone": ["+19548689893", "+15074488868"],
               "email": "info@flexelectricfl.com",
-              "description": "Licensed electrical contractors serving South Florida with over 30 years of combined experience in residential and commercial electrical services.",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "1860 SW Fountainview Blvd, #1008",
-                "addressLocality": "Port St. Lucie",
-                "addressRegion": "FL",
-                "postalCode": "34986",
-                "addressCountry": "US"
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": 27.650193982806277,
-                "longitude": -80.39983978491936
-              },
+              "description": "National provider for design, installation and maintenance of electrical systems, structured cabling applications, fiber optic cables, integrated electronic structures and building solutions for commercial and industrial clients.",
+              "location": [
+                {
+                  "@type": "Place",
+                  "name": "Florida Headquarters",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "1860 SW Fountainview Blvd, #1008",
+                    "addressLocality": "Port St. Lucie",
+                    "addressRegion": "FL",
+                    "postalCode": "34986",
+                    "addressCountry": "US"
+                  },
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 27.650193982806277,
+                    "longitude": -80.39983978491936
+                  },
+                  "telephone": "+19548689893"
+                },
+                {
+                  "@type": "Place",
+                  "name": "New York Office",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "767 Broadway #1413",
+                    "addressLocality": "Manhattan",
+                    "addressRegion": "NY",
+                    "postalCode": "10003",
+                    "addressCountry": "US"
+                  },
+                  "telephone": "+15074488868"
+                }
+              ],
               "openingHoursSpecification": [
                 {
                   "@type": "OpeningHoursSpecification",
@@ -120,43 +141,27 @@ export default function RootLayout({ children }) {
                 }
               ],
               "priceRange": "$$",
-              "areaServed": [
-                "Brevard County",
-                "Indian River County",
-                "St. Lucie County",
-                "Martin County",
-                "Palm Beach County",
-                "Broward County"
-              ],
+              "areaServed": "United States",
               "serviceType": [
                 "Commercial Electrical Services",
-                "Residential Electrical Services",
-                "Electrical Panel Upgrades",
-                "Lighting Installation",
+                "Industrial Electrical Systems",
+                "Institutional & Government Electrical",
+                "Healthcare Facility Electrical",
+                "Data Center & IT Infrastructure",
+                "EV Charging Station Installation",
+                "Fiber Optic Cabling Systems",
                 "Emergency Electrical Services"
               ],
               "sameAs": [
-                "https://www.facebook.com/flexelectric", // Replace with actual links
+                "https://www.facebook.com/flexelectric",
                 "https://www.instagram.com/flexelectric"
               ]
             })
           }}
         />
         
-        {/* Google Tag Manager - Add when you have a GTM account */}
-        {/* <Script
-          id="gtm-script"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-XXXXXXX');`
-          }}
-        /> */}
-        
         <Navbar />
+        <ScrollPaddingFix />
         <main>{children}</main>
         <FooterDark />
       </body>

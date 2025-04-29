@@ -185,7 +185,7 @@ export default function AboutPage() {
             >
               <div className="relative h-[400px] overflow-hidden rounded-lg shadow-xl">
                 <Image 
-                  src="/gallery/APOK-6.png" 
+                  src="/gallery/APOK-6.jpg" 
                   alt="Professional electrical installation by Flex Electric" 
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"

@@ -265,13 +265,7 @@ function PartnerBenefits() {
               <h3 className="text-xl font-edgar text-dark uppercase mb-4 group-hover:text-accent transition-colors">{benefit.title}</h3>
               <p className="text-dark/70">{benefit.description}</p>
               
-              {/* Reveal on hover link */}
-              <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Link href="/contact" className="text-accent text-sm flex items-center justify-center">
-                  <span>Learn more</span>
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </Link>
-              </div>
+              {/* Removed the "Learn more" links as requested */}
             </motion.div>
           ))}
         </div>

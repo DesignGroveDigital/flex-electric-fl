@@ -80,3 +80,13 @@ html {
 .parallelogramButton:hover {
   background-color: #367c39;
 }
+
+html {
+  /* Adjust the value (112px) based on your actual navbar height */
+  scroll-padding-top: 90px;
+  
+  /* For different screen sizes, you might want to adjust the padding */
+  @media (max-width: 768px) {
+    scroll-padding-top: 72px; /* Smaller padding for mobile */
+  }
+}

@@ -7,8 +7,11 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 const ServiceCard = ({ image, title, description, delay = 0 }) => {
+  // Create the anchor link ID from the title
+  const sectionId = title.toLowerCase().replace(/\s+/g, '-');
+  
   return (
-    <Link href={`/services#${title.toLowerCase().replace(/\s+/g, '-')}`}>
+    <Link href={`/services#${sectionId}`}>
       <motion.div 
         className="bg-white rounded-lg overflow-hidden shadow-lg h-full flex flex-col cursor-pointer 
                    transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group"
@@ -38,12 +41,12 @@ const ServiceCard = ({ image, title, description, delay = 0 }) => {
         
         {/* Content section */}
         <div className="p-6 flex-grow flex flex-col">
-          <h3 className="text-xl font-bold mb-4 text-[#2b2b2b] font-edgar transition-colors">{title}</h3>
-          <p className="text-dark/80 mb-6 flex-grow leading-relaxed sm:text-base">{description}</p>
+          <h3 className="text-xl font-bold mb-4 text-[#2b2b2b] font-edgar transition-colors break-words">{title}</h3>
+          <p className="text-dark/80 mb-6 flex-grow leading-relaxed sm:text-base break-words">{description}</p>
           <div 
             className="text-accent hover:text-primary transition-colors duration-300 inline-flex items-center text-xs font-edgar"
           >
-            VIEW ALL SERVICES
+            LEARN MORE
             <ArrowRight className="ml-2 w-4 h-4 transform transition-transform group-hover:translate-x-1" />
           </div>
         </div>
@@ -56,17 +59,17 @@ const ServicesSection = () => {
   const services = [
     {
       image: "/data-center-cables.jpg",
-      title: "Commercial",
+      title: "Commercial Electrical",
       description: "Comprehensive electrical solutions for hospitals, educational facilities, data centers, office buildings, and various commercial properties. Our expertise ensures reliable power systems tailored to your specific business requirements."
     },
     {
       image: "/ev-charging-station.jpg",
-      title: "Industrial",
+      title: "Industrial Installations",
       description: "Specialized electrical systems for industrial applications including automation, power generation, EV charging stations, and fiber optic networks. We deliver reliable infrastructure that meets the demands of modern industrial operations."
     },
     {
       image: "/maintenance.jpg",
-      title: "Service and Maintenance",
+      title: "Service and Maintenance Solutions",
       description: "24/7 emergency response and preventative maintenance services to keep your electrical systems operating at peak performance. Our dedicated team ensures minimal downtime and maximum system longevity."
     },
   ];

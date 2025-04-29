@@ -160,6 +160,16 @@ const HeroSection = () => {
               With over 30 years of combined experience, our licensed professionals deliver reliable, code-compliant electrical systems tailored to your enterprise operations. Experience the confidence that comes with America's trusted industrial electrical contractor.
             </p>
           </motion.div>
+          <motion.div 
+            className="space-y-4 md:space-y-6 w-full max-w-4xl mx-auto"
+            initial="hidden"
+            animate="visible"
+            variants={contentVariants}
+          >
+            <p className='text-sm sm:text-base md:text-lg leading-relaxed px-2 text-accent font-edgar lg:pt-4 tracking-wide'>
+              SERVING FLORIDA, NEW YORK, AND THE U.S. NATIONWIDE
+            </p>
+          </motion.div>
           
         </div>
       </div>

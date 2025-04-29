@@ -22,13 +22,13 @@ const AboutSection = () => {
               {/* Main image */}
               <div className="relative w-full h-[400px] lg:h-[480px]">
                 <Image
-                  src="/about.jpg" 
+                  src="/boca-raton.jpg" 
                   alt="Professional electricians working on a commercial project"
                   fill
                   className="object-cover"
                 />
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b]/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b]/0 to-transparent"></div>
               </div>
               
               {/* Decorative border */}
