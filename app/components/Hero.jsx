@@ -122,16 +122,17 @@ const HeroSection = () => {
                 Pow<span className="text-accent relative">
                   e
                 </span>ring
+                <br />
+                <span 
+                  className="text-3xl sm:text-4xl md:text-6xl font-edgar leading-tight uppercase tracking-wider"
+                  initial="hidden"
+                  animate="visible"
+                  variants={subtitleVariants}
+                >
+                  Your Future
+                </span>
               </motion.h1>
               
-              <motion.h2 
-                className="text-3xl sm:text-4xl md:text-6xl font-edgar leading-tight uppercase tracking-wider"
-                initial="hidden"
-                animate="visible"
-                variants={subtitleVariants}
-              >
-                Your Future
-              </motion.h2>
             </div>
             
             <motion.div 

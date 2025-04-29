@@ -16,12 +16,12 @@ const optiEdgar = localFont({
 });
 
 export const metadata = {
-  title: "FlexElectric - National Commercial & Industrial Electrical Contractors",
-  description: "Leading electrical contractor with offices in Florida and New York providing professional electrical services nationwide. Specialists in commercial, industrial, and institutional electrical systems, fiber optic cabling, and EV charging infrastructure.",
+  title: "FlexElectric - Commercial & Industrial Electrical Contractors",
+  description: "Leading electrical contractor with offices in Florida and New York providing professional electrical services nationwide. Specialists in commercial, industrial, and institutional electrical systems.",
   keywords: "electrical contractors, nationwide electrical services, commercial electrical, industrial electrical, fiber optic cabling, EV charging stations, data centers, hospital electrical, institutional electrical, emergency electrical services",
   robots: "index, follow",
   alternates: {
-    canonical: "https://flexelectricfl.com",
+    canonical: "https://www.flexelectricfl.com",
   },
   authors: [{ name: "Flex Electric, Inc." }],
   generator: "Next.js",
