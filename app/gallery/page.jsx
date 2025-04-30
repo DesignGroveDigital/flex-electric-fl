@@ -6,61 +6,52 @@ import PageBannerAngled from '../components/Banner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight, Lightbulb, X, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
-const shuffleArray = (array) => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
-
 // Updated gallery images with new categories: Commercial, Infrastructure, Multi-family
 const galleryImages = [
-    {
-      src: '/gallery/20240503_120009.jpg',
-      alt: 'Modern commercial interior with large windows',
-      category: 'commercial',
-      title: 'Commercial Interior',
-      type: 'image'
-    },
-    {
-      src: '/gallery/20240503_120023 (1).jpg',
-      alt: 'Interior ceiling with recessed lighting',
-      category: 'commercial',
-      title: 'Office Lighting Installation',
-      type: 'image'
-    },
-    {
-      src: '/gallery/20240503_120152 (1).jpg',
-      alt: 'Aerial view of commercial building complex',
-      category: 'commercial',
-      title: 'Commercial Development',
-      type: 'image'
-    },
-    {
-      src: '/gallery/apoc-town-homes.jpg',
-      alt: 'Modern town home electrical installation',
-      category: 'multi-family',
-      title: 'Town Home Electrical',
-      type: 'image'
-    },
-    {
-      src: '/gallery/APOK-5.png',
-      alt: 'Aerial view of residential development',
-      category: 'multi-family',
-      title: 'Residential Development',
-      type: 'image'
-    },
-    {
-      src: '/gallery/APOK-6.jpg',
-      alt: 'Overhead view of apartment complex',
-      category: 'multi-family',
-      title: 'Apartment Complex',
-      type: 'image'
-    },
-    {
-      src: '/gallery/APOK TOWN HOMES.jpg',
+  {
+    src: '/gallery/20240503_120009.jpg',
+    alt: 'Modern commercial interior with large windows',
+    category: 'commercial',
+    title: 'Commercial Interior',
+    type: 'image'
+  },
+  {
+    src: '/gallery/20240503_120023 (1).jpg',
+    alt: 'Interior ceiling with recessed lighting',
+    category: 'commercial',
+    title: 'Office Lighting Installation',
+    type: 'image'
+  },
+  {
+    src: '/gallery/20240503_120152 (1).jpg',
+    alt: 'Aerial view of commercial building complex',
+    category: 'commercial',
+    title: 'Commercial Development',
+    type: 'image'
+  },
+  {
+    src: '/gallery/apoc-town-homes.jpg',
+    alt: 'Modern town home electrical installation',
+    category: 'multi-family',
+    title: 'Town Home Electrical',
+    type: 'image'
+  },
+  {
+    src: '/gallery/APOK-5.png',
+    alt: 'Aerial view of residential development',
+    category: 'multi-family',
+    title: 'Residential Development',
+    type: 'image'
+  },
+  {
+    src: '/gallery/APOK-6.jpg',
+    alt: 'Overhead view of apartment complex',
+    category: 'multi-family',
+    title: 'Apartment Complex',
+    type: 'image'
+  },
+  {
+    src: '/gallery/APOK TOWN HOMES.jpg',
       alt: 'Modern townhome development with electrical installations',
       category: 'multi-family',
       title: 'APOK Townhomes',
@@ -249,171 +240,180 @@ const galleryImages = [
       type: 'image'
     },
     {
-    src: '/gallery/healthcare-1.png',
-    alt: 'Healthcare facility electrical installation',
-    category: 'healthcare',
-    title: 'Good Samaritan Medical Center',
+      src: '/gallery/healthcare-1.png',
+      alt: 'Healthcare facility electrical installation',
+      category: 'healthcare',
+      title: 'Good Samaritan Medical Center',
       type: 'image'
     },
     {
-    src: '/gallery/industrial-1.jpg',
-    alt: 'Industrial power plant',
-    category: 'industrial',
-    title: 'Industrial Power Plant',
-      type: 'image'
-    },
-    {
-    src: '/gallery/industrial-2.jpg',
-    alt: 'Industrial power plant with electrical systems',
-    category: 'industrial',
-    title: 'Industrial Power Plant',
-      type: 'image'
-    },
-    {
-    src: '/gallery/industrial-3.jpg',
-    alt: 'Industrial power plant with electrical systems',
-    category: 'industrial',
-    title: 'Industrial Power Plant',
-      type: 'image'
-    },
-    {
-      src: '/gallery/GULF STREAM VIEWS TOWNHOMES.png',
-      alt: 'Gulf Stream Views Townhomes electrical installation project',
-      category: 'multi-family',
-      title: 'Gulf Stream Views Townhomes',
-      type: 'image'
-    },
-    {
-      src: '/gallery/infrastructure-10.jpg',
-      alt: 'Construction equipment for electrical infrastructure',
-      category: 'infrastructure',
-      title: 'Construction Machinery',
-      type: 'image'
-    },
-    {
-      src: '/gallery/infrastructure-11.jpg',
-      alt: 'Electrical infrastructure installation',
-      category: 'infrastructure',
-      title: 'Electrical Infrastructure',
-      type: 'image'
-    },
-    {
-      src: '/gallery/infrastructure-12.jpg',
-      alt: 'Electrical infrastructure installation with conduit',
-      category: 'infrastructure',
-      title: 'Electrical Conduit Installation',
-      type: 'image'
-    },
-    {
-      src: '/gallery/infrastructure-13.jpg',
-      alt: 'Flex electric team working on electrical infrastructure',
-      category: 'infrastructure',
-      title: 'Flex Electric Team at Work',
-      type: 'image'
-    },
-    {
-      src: '/gallery/industrial-4.jpg',
-      alt: 'APP Jet Center electrical installation',
-      category: 'industrial',
-      title: 'APP Jet Center',
-      type: 'image'
-    },
-    {
-      src: '/gallery/industrial-5.jpg',
-      alt: 'APP Jet Center electrical installation',
-      category: 'industrial',
-      title: 'APP Jet Center',
-      type: 'image'
-    },
-    {
-      src: '/gallery/industrial-6.jpg',
-      alt: 'APP Jet Center electrical installation',
-      category: 'industrial',
-      title: 'APP Jet Center',
-      type: 'image'
-    },
-    {
-      src: '/gallery/industrial-7.jpg',
-      alt: 'APP Jet Center electrical installation',
-      category: 'industrial',
-      title: 'APP Jet Center',
-      type: 'image'
-    },
-    {
-      src: '/gallery/industrial-8.jpg',
-      alt: 'APP Jet Center electrical installation',
-      category: 'industrial',
-      title: 'APP Jet Center',
-      type: 'image'
-    },
-    {
-      src: '/gallery/infrastructure-14.jpg',
-      alt: 'Electrical conduit installed underground',
-      category: 'infrastructure',
-      title: 'Underground Electrical Conduit',
-      type: 'image'
-    },
-    {
-      src: '/gallery/fountain-business-center-1.jpg',
-      alt: 'Fountain Business Center electrical project',
-      category: 'commercial',
-      title: 'Fountain Business Center',
-      type: 'image'
-    },
-    {
-      src: '/gallery/fountain-business-center-2.jpg',
-      alt: 'Fountain Business Center electrical project',
-      category: 'commercial',
-      title: 'Fountain Business Center',
-      type: 'image'
-    },
-    {
-      src: '/gallery/industrial-9.jpg',
-      alt: 'Directional boring machine for electrical installation',
-      category: 'industrial',
-      title: 'Directional Boring Machine',
-      type: 'image'
-    },
-
-  ];
-
-  const galleryVideos = [
-    {
-      src: '/gallery/infrastructure-vid-1.mp4',
-      alt: 'Crew working on electrical infrastructure',
-      category: 'infrastructure',
-      title: 'Infrastructure Work',
-      type: 'video'
-    },
-    {
-      src: '/gallery/infrastructure-vid-2.mp4',
-      alt: 'Crew working on electrical infrastructure',
-      category: 'infrastructure',
-      title: 'Infrastructure Work',
-      type: 'video'
-    },
-    {
-      src: '/gallery/infrastructure-vid-3.mp4',
-      alt: 'Crew working on electrical infrastructure',
-      category: 'infrastructure',
-      title: 'Infrastructure Work',
-      type: 'video'
-    },
-    {
-      src: '/gallery/infrastructure-vid-4.mp4',
-      alt: 'Crew working on electrical infrastructure',
-      category: 'infrastructure',
-      title: 'Infrastructure Work',
-      type: 'video'
-    },
-    {
-      src: '/gallery/industrial-vid-1.mp4',
-      alt: 'Industrial power plant project site',
+      src: '/gallery/industrial-1.jpg',
+      alt: 'Industrial power plant',
       category: 'industrial',
       title: 'Industrial Power Plant',
-      type: 'video'
+      type: 'image'
     },
+    {
+      src: '/gallery/industrial-2.jpg',
+      alt: 'Industrial power plant with electrical systems',
+      category: 'industrial',
+      title: 'Industrial Power Plant',
+      type: 'image'
+    },
+    {
+      src: '/gallery/industrial-3.jpg',
+      alt: 'Industrial power plant with electrical systems',
+      category: 'industrial',
+    title: 'Industrial Power Plant',
+    type: 'image'
+  },
+  {
+    src: '/gallery/GULF STREAM VIEWS TOWNHOMES.png',
+    alt: 'Gulf Stream Views Townhomes electrical installation project',
+    category: 'multi-family',
+    title: 'Gulf Stream Views Townhomes',
+    type: 'image'
+  },
+  {
+    src: '/gallery/infrastructure-10.jpg',
+    alt: 'Construction equipment for electrical infrastructure',
+    category: 'infrastructure',
+    title: 'Construction Machinery',
+    type: 'image'
+  },
+  {
+    src: '/gallery/infrastructure-11.jpg',
+    alt: 'Electrical infrastructure installation',
+    category: 'infrastructure',
+    title: 'Electrical Infrastructure',
+    type: 'image'
+  },
+  {
+    src: '/gallery/infrastructure-12.jpg',
+    alt: 'Electrical infrastructure installation with conduit',
+    category: 'infrastructure',
+    title: 'Electrical Conduit Installation',
+    type: 'image'
+  },
+  {
+    src: '/gallery/infrastructure-13.jpg',
+    alt: 'Flex electric team working on electrical infrastructure',
+    category: 'infrastructure',
+    title: 'Flex Electric Team at Work',
+    type: 'image'
+  },
+  {
+    src: '/gallery/industrial-4.jpg',
+    alt: 'APP Jet Center electrical installation',
+    category: 'industrial',
+    title: 'APP Jet Center',
+    type: 'image'
+  },
+  {
+    src: '/gallery/industrial-5.jpg',
+    alt: 'APP Jet Center electrical installation',
+    category: 'industrial',
+    title: 'APP Jet Center',
+    type: 'image'
+  },
+  {
+    src: '/gallery/industrial-6.jpg',
+    alt: 'APP Jet Center electrical installation',
+    category: 'industrial',
+    title: 'APP Jet Center',
+    type: 'image'
+  },
+  {
+    src: '/gallery/industrial-7.jpg',
+    alt: 'APP Jet Center electrical installation',
+    category: 'industrial',
+    title: 'APP Jet Center',
+    type: 'image'
+  },
+  {
+    src: '/gallery/industrial-8.jpg',
+    alt: 'APP Jet Center electrical installation',
+    category: 'industrial',
+    title: 'APP Jet Center',
+    type: 'image'
+  },
+  {
+    src: '/gallery/infrastructure-14.jpg',
+    alt: 'Electrical conduit installed underground',
+    category: 'infrastructure',
+    title: 'Underground Electrical Conduit',
+    type: 'image'
+  },
+  {
+    src: '/gallery/fountain-business-center-1.jpg',
+    alt: 'Fountain Business Center electrical project',
+    category: 'commercial',
+    title: 'Fountain Business Center',
+    type: 'image'
+  },
+  {
+    src: '/gallery/fountain-business-center-2.jpg',
+    alt: 'Fountain Business Center electrical project',
+    category: 'commercial',
+    title: 'Fountain Business Center',
+    type: 'image'
+  },
+  {
+    src: '/gallery/industrial-9.jpg',
+    alt: 'Directional boring machine for electrical installation',
+    category: 'industrial',
+    title: 'Directional Boring Machine',
+    type: 'image'
+  },
+  
 ];
+
+const galleryVideos = [
+  {
+    src: '/gallery/infrastructure-vid-1.mp4',
+    alt: 'Crew working on electrical infrastructure',
+    category: 'infrastructure',
+    title: 'Infrastructure Work',
+    type: 'video'
+  },
+  {
+    src: '/gallery/infrastructure-vid-2.mp4',
+    alt: 'Crew working on electrical infrastructure',
+    category: 'infrastructure',
+    title: 'Infrastructure Work',
+    type: 'video'
+  },
+  {
+    src: '/gallery/infrastructure-vid-3.mp4',
+    alt: 'Crew working on electrical infrastructure',
+    category: 'infrastructure',
+    title: 'Infrastructure Work',
+    type: 'video'
+  },
+  {
+    src: '/gallery/infrastructure-vid-4.mp4',
+    alt: 'Crew working on electrical infrastructure',
+    category: 'infrastructure',
+    title: 'Infrastructure Work',
+    type: 'video'
+  },
+  {
+    src: '/gallery/industrial-vid-1.mp4',
+    alt: 'Industrial power plant project site',
+    category: 'industrial',
+    title: 'Industrial Power Plant',
+    type: 'video'
+  },
+];
+
+const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
 
 // Combine images and videos into one gallery array
 const galleryItems = [...galleryImages, ...galleryVideos];
@@ -932,6 +932,7 @@ const MediaCarouselWithModal = ({ items, openModal }) => {
 };
 
 // Modified Grid Component with Modal Support and Updated Filter Categories
+// Modified Grid Component with Modal Support and Updated Filter Categories
 const MediaGridWithModal = ({ items, openModal }) => {
   const [filter, setFilter] = useState('all');
   const [activeItems, setActiveItems] = useState([]);
@@ -946,21 +947,22 @@ const MediaGridWithModal = ({ items, openModal }) => {
   });
 
   useEffect(() => {
-    // Randomize all items
+    // Only randomize the "all" category
     categoryItemsRef.current.all = shuffleArray(items);
     
-    // Randomize each category separately
+    // For other categories, maintain the original order
     const categories = ['commercial', 'industrial', 'infrastructure', 'multi-family', 'healthcare'];
     categories.forEach(category => {
+      // Filter items by category but do NOT shuffle them
       const categoryItems = items.filter(item => item.category === category);
-      categoryItemsRef.current[category] = shuffleArray(categoryItems);
+      categoryItemsRef.current[category] = categoryItems; // No shuffling here
     });
     
     // Set initial active items
     setActiveItems(categoryItemsRef.current.all);
   }, [items]);
   
-  // Use the pre-randomized arrays when changing filters
+  // Use the arrays when changing filters
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
     setActiveItems(categoryItemsRef.current[newFilter]);
@@ -1054,30 +1056,30 @@ const MediaGridWithModal = ({ items, openModal }) => {
                 }
               }}
             >
-                              {item.type === 'video' ? (
-                  <div className="relative w-full h-full">
-                    <video
-                      src={item.src}
-                      alt={item.alt}
-                      className="object-cover w-full h-full"
-                      muted
-                      playsInline
-                    />
-                    {/* Video Play Indicator */}
-                    <div className="absolute inset-0 flex items-center justify-center group-hover:opacity-100 opacity-80 transition-opacity">
-                      <div className="bg-accent/80 rounded-full p-4">
-                        <Play className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <Image
+              {item.type === 'video' ? (
+                <div className="relative w-full h-full">
+                  <video
                     src={item.src}
                     alt={item.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="object-cover w-full h-full"
+                    muted
+                    playsInline
                   />
-                )}
+                  {/* Video Play Indicator */}
+                  <div className="absolute inset-0 flex items-center justify-center group-hover:opacity-100 opacity-80 transition-opacity">
+                    <div className="bg-accent/80 rounded-full p-4">
+                      <Play className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b]/80 via-[#2b2b2b]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 p-4 text-white">
                   <h3 className="text-lg font-edgar">{item.title}</h3>
