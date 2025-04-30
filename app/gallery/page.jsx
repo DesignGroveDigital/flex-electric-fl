@@ -296,13 +296,6 @@ const galleryImages = [
     type: 'image'
   },
   {
-    src: '/gallery/infrastructure-13.jpg',
-    alt: 'Flex electric team working on electrical infrastructure',
-    category: 'infrastructure',
-    title: 'Flex Electric Team at Work',
-    type: 'image'
-  },
-  {
     src: '/gallery/industrial-4.jpg',
     alt: 'APP Jet Center electrical installation',
     category: 'industrial',

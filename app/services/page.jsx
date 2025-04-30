@@ -53,7 +53,7 @@ export default function ServicesPage() {
           { name: "Automation Systems", icon: <Factory className="w-5 h-5" /> },
           { name: "Power Generation Systems", icon: <Power className="w-5 h-5" /> },
           { name: "Stand By Power Solutions", icon: <Power className="w-5 h-5" /> },
-          { name: "Motion Control", icon: <Wrench className="w-5 h-5" /> },
+          { name: "Motor Control", icon: <Wrench className="w-5 h-5" /> },
           { name: "Civil And Transit Projects", icon: <Building className="w-5 h-5" /> },
           { name: "EV Charging Stations", icon: <Car className="w-5 h-5" /> },
           { name: "Directional Bore", icon: <Wrench className="w-5 h-5" /> },
