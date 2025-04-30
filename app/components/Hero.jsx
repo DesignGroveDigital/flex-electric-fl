@@ -168,7 +168,7 @@ const HeroSection = () => {
             variants={contentVariants}
           >
             <p className='text-sm sm:text-base md:text-lg leading-relaxed px-2 text-accent font-edgar lg:pt-4 tracking-wide'>
-              SERVING FLORIDA, NEW YORK, AND THE U.S. NATIONWIDE
+              SERVING FLORIDA, NEW YORK, AND CLIENTS NATIONWIDE
             </p>
           </motion.div>
           
