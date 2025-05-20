@@ -254,13 +254,6 @@ const galleryImages = [
       type: 'image'
     },
     {
-      src: '/gallery/industrial-2.jpg',
-      alt: 'Industrial power plant with electrical systems',
-      category: 'industrial',
-      title: 'Industrial Power Plant',
-      type: 'image'
-    },
-    {
       src: '/gallery/industrial-3.jpg',
       alt: 'Industrial power plant with electrical systems',
       category: 'industrial',
@@ -388,13 +381,6 @@ const galleryVideos = [
     alt: 'Crew working on electrical infrastructure',
     category: 'infrastructure',
     title: 'Infrastructure Work',
-    type: 'video'
-  },
-  {
-    src: '/gallery/industrial-vid-1.mp4',
-    alt: 'Industrial power plant project site',
-    category: 'industrial',
-    title: 'Industrial Power Plant',
     type: 'video'
   },
 ];
