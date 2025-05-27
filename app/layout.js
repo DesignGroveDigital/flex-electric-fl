@@ -159,7 +159,22 @@ export default function RootLayout({ children }) {
             })
           }}
         />
-        
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-YFMYHQLR6S"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-YFMYHQLR6S');
+            `,
+          }}
+        />
         <Navbar />
         <ScrollPaddingFix />
         <main>{children}</main>
