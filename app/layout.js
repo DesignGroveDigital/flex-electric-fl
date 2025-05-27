@@ -160,7 +160,7 @@ export default function RootLayout({ children }) {
           }}
         />
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-YFMYHQLR6S"
+          src="https://www.googletagmanager.com/gtag/js?id=G-PNCMMVNGJM"
           strategy="afterInteractive"
         />
         <Script
@@ -171,7 +171,7 @@ export default function RootLayout({ children }) {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-YFMYHQLR6S');
+              gtag('config', 'G-PNCMMVNGJM');
             `,
           }}
         />
