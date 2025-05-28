@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, ChevronRight, Clock, Globe, Award, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, ChevronRight, Clock, Globe, Award, ArrowRight, Instagram, Facebook, Youtube } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const links = [
@@ -48,6 +48,48 @@ const Footer = () => {
                 <div className="space-y-2 text-white/70 pl-8">
                   <p>License: EC13008376</p>
                   <p>Member of the IEC</p>
+                </div>
+              </div>
+
+              {/* Social Media Links */}
+              <div className="pt-4">
+                <h4 className="font-edgar text-white uppercase tracking-wider text-sm mb-4">Follow Us</h4>
+                <div className="flex items-center gap-4">
+                  <motion.a
+                    href="https://instagram.com/flexelectricfl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-accent/80 rounded-lg flex items-center justify-center text-white/70 hover:text-white transition-colors duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Follow us on Instagram"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </motion.a>
+                  
+                  <motion.a
+                    href="https://facebook.com/FlexElectricFL"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-accent/80 rounded-lg flex items-center justify-center text-white/70 hover:text-white transition-colors duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Follow us on Facebook"
+                  >
+                    <Facebook className="w-5 h-5" />
+                  </motion.a>
+                  
+                  <motion.a
+                    href="https://youtube.com/@flexelectricfl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-white/10 hover:bg-accent/80 rounded-lg flex items-center justify-center text-white/70 hover:text-white transition-colors duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label="Subscribe to our YouTube channel"
+                  >
+                    <Youtube className="w-5 h-5" />
+                  </motion.a>
                 </div>
               </div>
             </div>
