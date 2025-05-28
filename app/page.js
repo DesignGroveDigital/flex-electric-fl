@@ -1,7 +1,5 @@
-import Image from "next/image";
 import ServicesSection from "./components/Services";
 import HeroSection from "./components/Hero";
-import FeaturesStrip from "./components/Features";
 import AboutSection from "./components/About";
 import WhyUsSection from "./components/WhyUs";
 import GallerySection from "./components/Gallery";

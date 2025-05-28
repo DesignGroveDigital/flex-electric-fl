@@ -21,12 +21,12 @@ const Navbar = () => {
     <nav className="w-full bg-white fixed top-0 z-50">
       <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-dark/10 to-transparent" />
       
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-20 lg:h-24">
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 xl:px-8">
+        <div className="flex items-center h-20 xl:h-24">
           {/* Logo - Left Aligned */}
           <div className="flex-shrink-0 mr-4">
             <Link href="/" className="flex items-center">
-              <div className="relative h-20 w-48 sm:h-20 sm:w-44 lg:h-24 lg:w-48">
+              <div className="relative h-20 w-48 sm:h-20 sm:w-44 xl:h-24 xl:w-48">
                 <Image
                   src="/FE_logo_color_wide_outline.svg"
                   alt="FlexElectric Logo"
@@ -38,14 +38,14 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Centered Navigation */}
-          <div className="hidden lg:flex flex-grow justify-center">
+          {/* Centered Navigation - Changed from lg: to xl: (1280px) */}
+          <div className="hidden xl:flex flex-grow justify-center">
             <div className="flex items-center">
               {navLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
-                  className="group relative px-4 xl:px-6 py-8 font-edgar text-xs text-dark hover:text-primary 
+                  className="group relative px-3 2xl:px-6 py-8 font-edgar text-xs text-dark hover:text-primary 
                            transition-colors duration-200 uppercase tracking-wider whitespace-nowrap"
                 >
                   {label}
@@ -56,11 +56,11 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Phone Button - Right Aligned */}
-          <div className="hidden lg:flex flex-shrink-0 ml-4 skew-x-[-20deg]">
+          {/* Phone Button - Right Aligned - Changed from lg: to xl: */}
+          <div className="hidden xl:flex flex-shrink-0 ml-4 skew-x-[-20deg]">
             <a
               href="tel:+19548689893"
-              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 xl:px-6 py-3
+              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 2xl:px-6 py-3
                        font-bold uppercase tracking-wider text-md whitespace-nowrap transition-colors"
             >
               <Phone className="w-4 h-4 skew-x-[20deg]" />
@@ -68,8 +68,8 @@ const Navbar = () => {
             </a>
           </div>
 
-          {/* Mobile/Tablet Menu Button */}
-          <div className="lg:hidden ml-auto">
+          {/* Mobile/Tablet Menu Button - Changed from lg: to xl: */}
+          <div className="xl:hidden ml-auto">
             <button
               className="text-dark hover:text-primary transition-colors p-2"
               onClick={() => setIsOpen(!isOpen)}
@@ -85,10 +85,10 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile/Tablet Navigation */}
+      {/* Mobile/Tablet Navigation - Changed from lg: to xl: */}
       <div
         className={`
-          lg:hidden fixed inset-0 top-24 sm:top-24 bg-dark/95 transform transition-transform 
+          xl:hidden fixed inset-0 top-24 sm:top-24 bg-dark/95 transform transition-transform 
           duration-300 ease-in-out backdrop-blur-sm ${isOpen ? 'translate-x-0' : 'translate-x-full'}
         `}
       >
