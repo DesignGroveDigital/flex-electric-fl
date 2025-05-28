@@ -92,7 +92,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="w-full min-h-[84vh] flex items-center relative md:pt-20 pt-16 overflow-hidden">
+    <section className="w-full min-h-[84vh] flex items-center relative md:pt-32 pt-20 overflow-hidden">
       {/* Background Image with Enhanced Parallax Effect */}
       <div 
         className="absolute inset-0 z-0"

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone, Instagram, Facebook, Youtube } from 'lucide-react';
+import { Menu, X, Phone, Mail, Instagram, Facebook, Youtube } from 'lucide-react';
 import Image from 'next/image';
 
 const Navbar = () => {
@@ -18,110 +18,132 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="w-full bg-white fixed top-0 z-50">
-      <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-dark/10 to-transparent" />
-      
-      <div className="max-w-[100rem] mx-auto px-4 sm:px-6 xl:px-8">
-        <div className="flex items-center h-20 xl:h-24">
-          {/* Left Section - Logo */}
-          <div className="flex-1 flex justify-start">
-            <Link href="/" className="flex items-center">
-              <div className="relative h-20 w-48 sm:h-20 sm:w-44 xl:h-24 xl:w-48">
-                <Image
-                  src="/FE_logo_color_wide_outline.svg"
-                  alt="FlexElectric Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-            </Link>
-          </div>
-
-          {/* Center Section - Navigation */}
-          <div className="hidden xl:flex flex-1 justify-center">
-            <div className="flex items-center">
-              {navLinks.map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="group relative px-3 2xl:px-4 py-8 font-edgar text-xs text-dark hover:text-primary 
-                           transition-colors duration-200 uppercase tracking-wider whitespace-nowrap"
-                >
-                  {label}
-                  <div className="absolute bottom-0 left-1/2 w-6 h-1 bg-primary transform -translate-x-1/2 scale-x-0 
-                                group-hover:scale-x-100 transition-transform origin-center" />
-                </Link>
-              ))}
+    <div className="fixed top-0 w-full z-50 bg-white">
+      {/* Top Utility Bar */}
+      <div className="hidden xl:block bg-accent border-b border-gray-200">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 xl:px-8">
+          <div className="flex justify-between items-center py-1">
+            {/* Left - Contact Info */}
+            <div className="flex items-center gap-6 text-sm">
+              <a 
+                href="mailto:info@flexelectricfl.com"
+                className="flex items-center gap-2 font-sans font-semibold text-white hover:text-white/70 transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+                info@flexelectricfl.com
+              </a>
+              <a 
+                href="tel:+19548689893"
+                className="flex items-center gap-2 font-sans font-semibold text-white hover:text-white/70 transition-colors"
+              >
+                <Phone className="w-5 h-5" />
+                (954) 868-9893
+              </a>
             </div>
-          </div>
 
-          {/* Right Section - Social + Phone */}
-          <div className="flex-1 flex justify-end items-center">
-            {/* Social Media Links */}
-            <div className="hidden xl:flex items-center gap-4 mr-6">
+            {/* Right - Social Media */}
+            <div className="flex items-center gap-3">
+              <p>
+                <span className="text-white font-sans font-semibold uppercase tracking-wider text-xs">Follow Us: </span>
+              </p>
               <a
                 href="https://instagram.com/flexelectricfl"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-100 hover:bg-primary/10 rounded-lg flex items-center justify-center text-dark/60 hover:text-primary transition-colors duration-200"
+                className="w-8 h-8 bg-transparent rounded-full flex items-center justify-center text-white hover:text-white/70 transition-colors duration-200"
                 aria-label="Follow us on Instagram"
               >
-                <Instagram className="w-4 h-4" />
+                <Instagram className="w-5 h-5" />
               </a>
               
               <a
                 href="https://facebook.com/FlexElectricFL"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-100 hover:bg-primary/10 rounded-lg flex items-center justify-center text-dark/60 hover:text-primary transition-colors duration-200"
+                className="w-8 h-8 bg-transparent rounded-md flex items-center justify-center text-white hover:text-white/70 transition-colors duration-200"
                 aria-label="Follow us on Facebook"
               >
-                <Facebook className="w-4 h-4" />
+                <Facebook className="w-5 h-5" />
               </a>
               
               <a
                 href="https://youtube.com/@flexelectricfl"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-100 hover:bg-primary/10 rounded-lg flex items-center justify-center text-dark/60 hover:text-primary transition-colors duration-200"
+                className="w-8 h-8 bg-transparent rounded-md flex items-center justify-center text-white hover:text-white/70 transition-colors duration-200"
                 aria-label="Subscribe to our YouTube channel"
               >
-                <Youtube className="w-4 h-4" />
+                <Youtube className="w-5 h-5" />
               </a>
             </div>
-
-            {/* Phone Button */}
-            <div className="hidden xl:flex flex-shrink-0 skew-x-[-20deg]">
-              <a
-                href="tel:+19548689893"
-                className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 2xl:px-7 py-3
-                         font-bold uppercase tracking-wider text-md whitespace-nowrap transition-colors"
-              >
-                <Phone className="w-4 h-4 skew-x-[20deg]" />
-                <span className='skew-x-[20deg]'>(954) 868-9893</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Mobile/Tablet Menu Button - Changed from lg: to xl: */}
-          <div className="xl:hidden ml-auto">
-            <button
-              className="text-dark hover:text-primary transition-colors p-2"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile/Tablet Navigation - Changed from lg: to xl: */}
+      {/* Main Navigation */}
+      <nav className="w-full bg-white border-b border-gray-100">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 xl:px-8">
+          <div className="flex items-center justify-between h-20 xl:h-24">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <Link href="/" className="flex items-center">
+                <div className="relative h-16 w-40 xl:h-20 xl:w-48">
+                  <Image
+                    src="/FE_logo_color_wide_outline.svg"
+                    alt="FlexElectric Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </Link>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden xl:flex items-center space-x-8">
+              {navLinks.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="group relative py-2 font-edgar text-sm text-dark hover:text-primary 
+                           transition-colors duration-200 uppercase tracking-wider whitespace-nowrap"
+                >
+                  {label}
+                  <div className="absolute bottom-0 left-1/2 w-6 h-0.5 bg-primary transform -translate-x-1/2 scale-x-0 
+                                group-hover:scale-x-100 transition-transform origin-center" />
+                </Link>
+              ))}
+            </div>
+
+            {/* Desktop CTA Button */}
+            <div className="hidden xl:block">
+              <Link 
+                href="/contact"
+                className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-edgar uppercase tracking-wider text-sm transition-colors duration-300"
+              >
+                Get Quote
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="xl:hidden">
+              <button
+                className="text-dark hover:text-primary transition-colors p-2"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="Toggle menu"
+              >
+                {isOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Navigation */}
       <div
         className={`
           xl:hidden fixed inset-0 top-20 bg-dark/95 transform transition-transform 
@@ -130,7 +152,7 @@ const Navbar = () => {
       >
         <div className="h-full overflow-y-auto">
           <div className="min-h-full p-6 max-w-md mx-auto flex flex-col justify-center">
-            {/* Main Navigation Links - Compact */}
+            {/* Main Navigation Links */}
             <div className="space-y-2 py-4">
               {navLinks.map(({ href, label }) => (
                 <Link
@@ -146,19 +168,37 @@ const Navbar = () => {
               ))}
             </div>
             
-            {/* Phone Button - Compact */}
+            {/* Mobile CTA */}
             <div className="py-4 border-t border-white/10">
+              <Link
+                href="/contact"
+                className="block text-center bg-primary hover:bg-primary/90 text-white py-3 text-lg 
+                         font-edgar uppercase tracking-wider rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Get Quote
+              </Link>
+            </div>
+            
+            {/* Contact Info */}
+            <div className="py-4 border-t border-white/10 space-y-2">
               <a
                 href="tel:+19548689893"
-                className="flex items-center justify-center gap-3 text-primary py-3 text-lg 
-                         font-edgar uppercase tracking-wider bg-white/5 rounded-lg"
+                className="flex items-center justify-center gap-3 text-white/80 hover:text-primary transition-colors"
               >
                 <Phone className="w-5 h-5" />
                 (954) 868-9893
               </a>
+              <a
+                href="mailto:info@flexelectricfl.com"
+                className="flex items-center justify-center gap-3 text-white/80 hover:text-primary transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+                info@flexelectricfl.com
+              </a>
             </div>
             
-            {/* Social Media Links - Compact */}
+            {/* Social Media Links */}
             <div className="py-4 border-t border-white/10">
               <p className="text-white/60 text-sm mb-3 font-edgar uppercase tracking-wider text-center">Follow Us</p>
               <div className="flex items-center justify-center gap-6">
@@ -197,12 +237,12 @@ const Navbar = () => {
               </div>
             </div>
             
-            {/* Spacer to ensure content can be scrolled past navbar */}
+            {/* Spacer */}
             <div className="py-4"></div>
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 
