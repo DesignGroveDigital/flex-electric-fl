@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, Phone, Mail, Instagram, Facebook, Youtube } from 'lucide-react';
+import { PiTiktokLogoBold } from "react-icons/pi";
 import Image from 'next/image';
 
 const Navbar = () => {
@@ -74,6 +75,16 @@ const Navbar = () => {
                 aria-label="Subscribe to our YouTube channel"
               >
                 <Youtube className="w-5 h-5" />
+              </a>
+
+              <a
+                href="https://tiktok.com/@flexelectricfl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 bg-transparent rounded-md flex items-center justify-center text-white hover:text-white/70 transition-colors duration-200"
+                aria-label="Follow us on TikTok"
+              >
+                <PiTiktokLogoBold className="w-5 h-5" />
               </a>
             </div>
           </div>
