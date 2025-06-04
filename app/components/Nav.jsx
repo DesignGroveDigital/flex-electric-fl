@@ -245,6 +245,17 @@ const Navbar = () => {
                   <Youtube className="w-6 h-6" />
                   <span className="text-xs">YouTube</span>
                 </a>
+
+                <a
+                  href="https://tiktok.com/@flexelectricfl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center gap-1 text-white/70 hover:text-primary transition-colors"
+                  aria-label="Follow us on TikTok"
+                >
+                  <PiTiktokLogoBold className="w-6 h-6" />
+                  <span className="text-xs">TikTok</span>
+                </a>
               </div>
             </div>
             
